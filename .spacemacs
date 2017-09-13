@@ -46,7 +46,6 @@ values."
      git
      markdown
      org
-     osx
      shell
      (shell :variables
             shell-default-height 30
@@ -89,7 +88,11 @@ values."
    ;; `used-but-keep-unused' installs only the used packages but won't uninstall
    ;; them if they become unused. `all' installs *all* packages supported by
    ;; Spacemacs and never uninstall them. (default is `used-only')
-   dotspacemacs-install-packages 'used-only))
+   dotspacemacs-install-packages 'used-only)
+  ;; User added
+  (when (spacemacs/system-is-mac)
+    (add-to-list 'dotspacemacs-configuration-layers 'osx))
+  )
 
 (defun dotspacemacs/init ()
   "Initialization function.
@@ -324,7 +327,7 @@ executes.
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
   ;; (setq ns-use-srgb-colorspace nil)
-  (setq ycmd-server-command (list "python" "/Users/shiroko/Development/ycmd/ycmd"))
+  (setq ycmd-server-command (list "python" "/home/shiroko/Development/ycmd/ycmd"))
   (setq ycmd-request-message-level -1)
   )
 
