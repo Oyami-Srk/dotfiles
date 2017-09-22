@@ -7,3 +7,4 @@ alias emacs="emacsclient -a "" -c"
 alias e=emacs
 alias antlr4='java -Xmx500M -cp "/usr/local/lib/antlr-4.5.3-complete.jar:$CLASSPATH" org.antlr.v4.Tool'
 alias grun='java org.antlr.v4.gui.TestRig'
+alias s=screen
