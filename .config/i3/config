@@ -1,0 +1,269 @@
+# Shiro no I3
+
+# Startup
+exec --no-startup-id $HOME/Scripts/ChangeBG.sh
+exec --no-startup-id fcitx
+exec --no-startup-id "ssr start"
+exec --no-startup-id "xcompmgr -c -C -t-5 -l-5 -r4.2 -o.55 &"
+exec --no-startup-id keynav
+exec --no-startup-id nm-applet
+# End of Startup
+
+# Set Win-key as mod-key
+set $mod Mod4
+
+font pango:wqy-microhei 9
+
+floating_modifier $mod
+
+# start a terminal
+bindsym $mod+Return exec i3-sensible-terminal
+
+# kill focused window
+bindsym $mod+Shift+q kill
+
+# start dmenu (a program launcher)
+bindsym $mod+d exec dmenu_run
+
+# ========================================================
+# Vi-Style Keybindings
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+# ========================================================
+
+# split in horizontal orientation
+bindsym $mod+u split h
+
+# split in vertical orentation
+bindsym $mod+i split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# focus the child container
+# bindsym $mod+d focus child
+
+# switch to workspace
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+0 move container to workspace 10
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        bindsym l resize shrink width 10 px or 10 ppt
+        bindsym j resize grow height 10 px or 10 ppt
+        bindsym k resize shrink height 10 px or 10 ppt
+        bindsym h resize grow width 10 px or 10 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+# define colors used
+set $bg-color 	         #2f343f30
+set $inactive-bg-color   #2f343f30
+set $text-color          #f3f4f5
+set $inactive-text-color #676E7D
+set $urgent-bg-color     #5294e200
+
+bar {
+    tray_output primary
+    # i3bar调用
+    status_command conky -c $HOME/.config/i3/conkyrc_bar
+    i3bar_command i3bar -t
+    # 显示位置
+    position top
+    # 拆解工作区名（隐藏前面的1:2:3:……）
+    strip_workspace_numbers no
+    font pango:wqy-microhei 10
+    colors {
+           # Set the background color of i3bar
+           focused_workspace  $bg-color          $bg-color          $text-color
+           inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
+           urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
+           background #00000000
+           # Set the color of i3bar's text
+           statusline #fefefeFF
+        } 
+}
+
+bindsym $mod+g exec --no-startup-id $HOME/Scripts/ChangeBG.sh
+
+bindsym $mod+Shift+minus move scratchpad
+bindsym $mod+minus scratchpad show
+bindsym $mod+Tab workspace next
+bindsym $mod+Shift+Tab workspace prev
+
+
+bindsym $mod+x exec --no-startup-id i3lock-fancy -f Monaco &
+bindsym $mod+b border toggle
+hide_edge_borders both
+new_window none
+new_float normal
+focus_follows_mouse no
+
+for_window [class="Nautilus"] floating enable
+for_window [class="nautilus"] border none
+
+
+set $mode_sys 系统选项：锁屏（L）；注销（O）；重启（R）；关机（S）；取消（Esc）
+bindsym Pause mode "$mode_sys"
+mode "$mode_sys"{
+	  bindsym l exec --no-startup-id i3lock -c 000000 -f, mode "default"
+	  bindsym o exec --no-startup-id i3-msg exit, mode "default"
+  	bindsym r exec --no-startup-id reboot, mode "default"
+  	bindsym s exec --no-startup-id poweroff, mode "default"
+  	bindsym Escape mode "default"
+    bindsym Return mode "default"
+}
+
+set $mode_exec 启动程序：Chrome（C）；Nautilus（N）；Terminal（T）；取消（Esc）
+bindsym $mod+y mode "$mode_exec"
+mode "$mode_exec"{
+     bindsym c exec google-chrome-stable, mode "default"
+     bindsym n exec nautilus, mode "default"
+     bindsym t exec i3-sensible-terminal, mode "default"
+     bindsym Escape mode "default"
+     bindsym Return mode "default"
+}
+
+bindsym Print exec scrot -q 100 $HOME/Pictures/Screenshots/`date +%Y-%m-%d_%H:%M:%S`.png
+bindsym $mod+Print exec scrot -q 100 -u $HOME/Pictures/Screenshots/`date +%Y-%m-%d_%H:%M:%S`.png
+bindsym XF86AudioRaiseVolume exec amixer set Master playback 3276.75+
+bindsym XF86AudioLowerVolume exec amixer set Master playback 3276.75-
+bindsym XF86AudioMute exec amixer set Master toggle
+
+#gaps
+#for_window [class="^.*"] border pixel 0
+set $gaps_inner_default 10
+set $gaps_outer_default 10
+gaps inner $gaps_inner_default
+gaps outer $gaps_outer_default
+
+set $mode_gaps Gaps: (o) outer, (i) inner
+set $mode_gaps_outer Outer Gaps: +|-|0|d (local), Shift + +|-|0|d (global)
+set $mode_gaps_inner Inner Gaps: +|-|0|d (local), Shift + +|-|0|d (global)
+bindsym $mod+Shift+g mode "$mode_gaps"
+
+# windows         Border    Background    Text     Indicator
+client.focused    #1793d1   #1793d1       #ffffff
+client.unfocused  #2f343f   #2f343f       #ffffff
+
+mode "$mode_gaps" {
+        bindsym o      mode "$mode_gaps_outer"
+        bindsym i      mode "$mode_gaps_inner"
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+mode "$mode_gaps_inner" {
+        bindsym plus  gaps inner current plus 5
+        bindsym minus gaps inner current minus 5
+        bindsym 0     gaps inner current set 0
+        bindsym d     gaps inner current set $gaps_inner_default
+
+        bindsym Shift+plus  gaps inner all plus 5
+        bindsym Shift+minus gaps inner all minus 5
+        bindsym Shift+0     gaps inner all set 0
+        bindsym Shift+d     gaps inner all set $gaps_inner_default
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+mode "$mode_gaps_outer" {
+        bindsym plus  gaps outer current plus 5
+        bindsym minus gaps outer current minus 5
+        bindsym 0     gaps outer current set 0
+        bindsym d     gaps outer current set $gaps_outer_default
+
+        bindsym Shift+plus  gaps outer all plus 5
+        bindsym Shift+minus gaps outer apolybar examplell minus 5
+        bindsym Shift+0     gaps outer all set 0
+        bindsym Shift+d     gaps outer all set $gaps_outer_default
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+mode "move floating window" {
+    bindsym k move up 20px
+    bindsym h move left 20px
+    bindsym j move down 20px
+    bindsym l move right 20px
+    bindsym $mod+m mode "default"
+    bindsym Escape mode "default"
+    bindsym Return mode "default"
+}
+bindsym $mod+m focus floating; mode "move floating window"
+
+smart_gaps on
+# smart_borders on
