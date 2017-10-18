@@ -91,3 +91,6 @@ source $ZSH/oh-my-zsh.sh
 # alias grun='java org.antlr.v4.gui.TestRig'
 
 eval $(thefuck --alias)
+
+#MacOS iTerm2
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"

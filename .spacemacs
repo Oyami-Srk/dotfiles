@@ -328,13 +328,23 @@ executes.
  This function is mostly useful for variables that need to be set
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
-  ;; (setq ns-use-srgb-colorspace nil)
-  (setq ycmd-server-command (list "python" "/home/shiroko/Development/ycmd/ycmd"))
+  (setq ns-use-srgb-colorspace nil)
+  ;; (setq ycmd-server-command (list "python" "/home/shiroko/Development/ycmd/ycmd"))
+  (setq ycmd-server-command (list "python" (file-truename "~/Development/ycmd/ycmd")))
   (setq ycmd-request-message-level -1)
-  (dolist (charset '(kana han symbol cjk-misc bopomofo))
-    (set-fontset-font (frame-parameter nil 'font)
-                      charset (font-spec :family "文泉驿等宽微米黑"
-                                         :size 16)))
+  (when (spacemacs/system-is-mac)
+    (dolist (charset '(kana han symbol cjk-misc bopomofo))
+      (set-fontset-font (frame-parameter nil 'font)
+                        charset (font-spec :family "文泉驿等宽微米黑"
+                                           :size 16)))
+    )
+
+  (when (spacemacs/system-is-linux)
+    (dolist (charset '(kana han symbol cjk-misc bopomofo))
+      (set-fontset-font (frame-parameter nil 'font)
+                        charset (font-spec :family "文泉驿等宽微米黑"
+                                           :size 16)))
+    )
   )
 
 (defun dotspacemacs/user-config ()
@@ -346,11 +356,19 @@ explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
   (setq powerline-default-separator 'utf-8)
   (spacemacs/enable-transparency)
-  (global-set-key [f12] 'spacemacs/toggle-transparency)
-  (global-set-key [f9] 'neotree-toggle)
+  (when (spacemacs/system-is-linux)
+    (global-set-key [f12] 'spacemacs/toggle-transparency)
+    (global-set-key [f9] 'neotree-toggle)
+    (global-set-key [S-f12] 'spacemacs/increase-transparency)
+    (global-set-key [C-f12] 'spacemacs/decrease-transparency)
+    )
+  (when (spacemacs/system-is-mac)
+    (global-set-key [f8] 'spacemacs/toggle-transparency)
+    (global-set-key [f9] 'neotree-toggle)
+    (global-set-key [S-f8] 'spacemacs/increase-transparency)
+    (global-set-key [C-f8] 'spacemacs/decrease-transparency)
+    )
 
-  (global-set-key [S-f12] 'spacemacs/increase-transparency)
-  (global-set-key [C-f12] 'spacemacs/decrease-transparency)
   (spacemacs/set-leader-keys "." 'set-mark-command)
 
   (add-hook 'c++-mode-hook 'clang-format-bingings)
@@ -365,10 +383,6 @@ you should place your code here."
   (prettify-symbols-mode)
   (global-prettify-symbols-mode t)
   (linum-relative-mode t)
-  (push '(baidu-search
-          :name "Baidu Search"
-          :url "http://www.baidu.com/s?wd=%s")
-        search-engine-alist)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
