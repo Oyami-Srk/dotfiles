@@ -1,9 +1,12 @@
 /*
 !.config
+!.fvwm
 /.config/*
 !.config/i3
 !.gitignore
 !.zshrc
 !.zshenv
 !.spacemacs
+!.xprofile
+!.Xresources
 !README.org
