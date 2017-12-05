@@ -94,3 +94,4 @@ eval $(thefuck --alias)
 
 #MacOS iTerm2
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+test -e "${HOME}/.xprofile" && source "${HOME}/.xprofile"
