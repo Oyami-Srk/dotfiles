@@ -1,0 +1,80 @@
+# User Menus
+DestroyMenu RootMenu
+AddToMenu RootMenu
++         "Fvwm 2.6.7" Title
++         "&URxvt%mini.monitor.xpm%"  Exec exec urxvt
++         ""                          Nop
++         "&Programs"                 Popup ProgramsMenu
++         "&Utilities"                Popup UtilitiesMenu
+# +         ""                          Nop
+# +         "Re&fresh Screen"           Refresh
++         "&Restart Fvwm"             Restart
+# +         "Re&capture Screen"         Recapture
++         ""                          Nop
++         "&Lock"                     Exec exec xscreensaver-command -lock
++         "&Exit Fvwm"                Popup Quit-Verify
+
+DestroyMenu Quit-Verify 
+AddToMenu Quit-Verify "Really?" Title 
++ "Yes! DO AS I SAID!!" Quit 
++ "Emmm... Restart is OK." Restart
++ "Sorry, DO NOT QUIT~" Nop 
+
+DestroyMenu MenuWindowOps
+AddToMenu   MenuWindowOps
++ "Move"      Move
++ "Resize"    Resize
++ "Iconify"   Iconify
++ "Maximize"  Maximize
++ "Shade"     WindowShade
++ "Stick"     Stick
++ "" Nop
++ "Close"     Close
++ "More..."   Menu MenuWindowOpsLong This 0 0
+
+DestroyMenu MenuWindowOpsLong
+AddToMenu   MenuWindowOpsLong
++ "Move"                Move
++ "Resize"              Resize
++ "(De)Iconify"         Iconify
++ "(Un)Maximize"        Maximize
++ "(Un)Shade"           WindowShade
++ "(Un)Sticky"		Stick
++ "(No)TitleBar"	Pick (CirculateHit) ToggleTitle
++ "Send To Desk"        Popup MenuSendToDesk
++ "" Nop
++ "Close"               Close
++ "Destroy"             Destroy
++ "" Nop
++ "Raise"		Raise
++ "Lower"		Lower
++ "" Nop
++ "StaysOnTop"          Pick (CirculateHit) Layer 0 6
++ "StaysPut"            Pick (CirculateHit) Layer 0 4
++ "StaysOnBottom"       Pick (CirculateHit) Layer 0 2
++ "" Nop
++ "Identify"            Module FvwmIdent
+
+DestroyMenu MenuIconOps
+AddToMenu   MenuIconOps
++ "&1. (De)Iconify"         Iconify
++ "&2. (Un)Maximize"        Maximize
++ "&3. (Un)Shade"           WindowShade
++ "&4. (Un)Sticky"		Stick
++ "&5. (No)TitleBar"	Pick (CirculateHit) ToggleTitle
++ "&6. Send To Desk"        Popup MenuSendToDesk
++ "" Nop
++ "&7. Close"               Close
++ "&8. Destroy"             Destroy
++ "" Nop
++ "&9. Raise"		Raise
++ "&0. Lower"		Lower
++ "" Nop
++ "&Q. StaysOnTop"          Pick (CirculateHit) Layer 0 6
++ "&W. StaysPut"            Pick (CirculateHit) Layer 0 4
++ "&E. StaysOnBottom"       Pick (CirculateHit) Layer 0 2
++ "" Nop
++ "&R. Identify"            Module FvwmIdent
+
+
+DestroyMenu MenuFvwmRoot

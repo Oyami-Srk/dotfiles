@@ -1,0 +1,64 @@
+# User Definied Functions
+
+DestroyFunc FuncMoveWindowToPage
+AddToFunc   FuncMoveWindowToPage
++ I MoveToPage $0 $1
++ I GotoPage $0 $1
+
+DestroyFunc FuncGotoPage
+AddToFunc   FuncGotoPage
++ I GotoPage $0 $1
++ I Next (CurrentPage, !Iconic, !Sticky, !Shaded, !Focused, !Overlapped) FuncSelectWindow
+
+DestroyFunc FuncSelectWindow
+AddToFunc   FuncSelectWindow
++ I Iconify off
++ I Focus
++ I Raise
+
+DestroyFunc Maximize-Func
+AddToFunc Maximize-Func
++         "M" Maximize 100 0
++         "C" Maximize 80 0
++         "D" Maximize 100 100
+
+DestroyFunc GenMenu
+AddToFunc GenMenu
++ I       PipeRead 'sh $HOME/.fvwm/gen-menu $0'
++ I       AddToMenu $0Menu ""       Nop
++ I       AddToMenu $0Menu "Re-Gen Menu"                     GenMenu $0
+
+DestroyFunc IconManClick
+AddToFunc   IconManClick
++ I ThisWindow (!Raised) Raise
++ I ThisWindow (Shaded) WindowShade
++ I ThisWindow (Iconic) Iconify
++ I ThisWindow (AcceptsFocus) FlipFocus
+
+DestroyFunc MyMaximize
+AddToFunc MyMaximize
++ I Current (!State 0) WindowStyle !Title,!Borders,!Handles,FixedPosition,FixedSize
++ I Current (State 0) WindowStyle Title,Borders,Handles,VariablePosition,VariableSize
++ I Current RefreshWindow
++ I Current  (!State 0) Maximize true
++ I Current (State 0) Maximize false
++ I Current State 0 toggle
+
+DestroyFunc ToggleTitle
+AddToFunc   ToggleTitle
++ I Current (!State 1) WindowStyle !Title
++ I Current (State 1)  WindowStyle Title
++ I Current RefreshWindow
++ I Current State 1 toggle
+
+DestroyFunc ToggleShaded
+AddToFunc   ToggleShaded
++ I Current WindowShade
+
+DestroyFunc Func_Title
+AddToFunc Func_Title
++ "C"     Nop
++ "M"     Move
++ "D"     WindowShade
+
+# Modified Existed Func

@@ -1,0 +1,10 @@
+saved_state=`ls $HOME/.fvwm/${1} -R|base64`
+while [ 1 = 1 ]
+do
+    current_state=`ls $HOME/.fvwm/${1} -R|base64`
+    if [ "$saved_state" != "$current_state" ]; then
+        saved_state=$current_state
+        FvwmCommand 'GenMenu "'$1'"'
+    fi
+    sleep 5
+done

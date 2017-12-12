@@ -1,0 +1,252 @@
+! Init&Destory Func
+DestroyFunc StartFunction
+AddToFunc StartFunction         
++ I Module FvwmAuto 500 Raise Nop
++ I Module FvwmAnimate
++ I Module FvwmCommandS
++ I Module FvwmScript
++ I Module FvwmEvent
++ I Module FvwmButtons FvwmTaskBar
++ I Exec exec ~/.screenlayout/screen_init.sh
++ I GenMenu "Programs"
++ I GenMenu "Utilities"
+# + I Exec exec ~/.fvwm/dir-watch Programs &
+# + I Exec exec ~/.fvwm/dir-watch Utilities &
+
+
+DestroyFunc InitFunction
+AddToFunc InitFunction    
++ I Exec exec xscreensaver -no-splash
+# + I Exec exec xcompmgr & # -c -C -t-5 -l-5 -r4.2 -o.55 &
++ I Exec exec compton &
++ I Exec exec ibus-daemon -x -r -d
++ I Exec exec osd_clock -f 8x16 -c white -F %H:%M:%S -s 0 -t &osd_clock -f 8x16 -c white -F %H:%M:%S -s 0 -t &
++ I Exec exec 
+DestroyFunc ExitFunction
+AddToFunc ExitFunction
++ I All (xscreensaver) Close
++ I All (compton) Close
++ I All (ibus-daemon) Close
+
+! Module
+*FvwmAnimate: Delay 25
+*FvwmAnimate: Effect Random
+*FvwmAnimate: Width 3
+
+*FvwmPager: Rows 1
+*FvwmPager: Columns 1
+*FvwmPagerBack #908090
+*FvwmPagerFore #484048
+*FvwmPager:Font "none"
+# "xft:WenQuanYi Micro Hei:pixelsize=14:Medium"
+*FvwmPagerHilight #cab3ca
+*FvwmPagerLabel Nop
+*FvwmPager:SmallFont "xft:WenQuanYi Micro Hei:pixelsize=12:Medium"
+*FvwmPagerBalloons            All
+*FvwmPagerBalloonBack         Yellow
+*FvwmPagerBalloonFore         Black
+*FvwmPager:BalloonFont "xft:WenQuanYi Micro Hei:pixelsize=14:Medium"
+*FvwmPagerBalloonYOffset      0
+*FvwmPagerBalloonBorderWidth  1
+*FvwmPagerBalloonBorderColor  Black
+*FvwmPager:Geometry 80x25-1920-50
+Style "FvwmPager" Sticky, NoHandles, WindowListSkip, !Borders, StaysOnTop, NoTitle
+
+# *FvwmIconMan:Font "xft:WenQuanYi Micro Hei:pixelsize=14:Medium"
+# *FvwmIconMan:Geometry 160x100
+
+DestroyModuleConfig FvwmIconMan: *
+*FvwmIconMan: UseWinList true
+*FvwmIconMan: Resolution global
+*FvwmIconMan: Tips needed
+*FvwmIconMan: Sort id
+
+# Manager Size
+*FvwmIconMan: ButtonGeometry 120x20
+*FvwmIconMan: ManagerGeometry 1x0-5+260
+
+# Button Styles
+*FvwmIconMan: Colorset 10
+*FvwmIconMan: FocusColorset 11
+*FvwmIconMan: SelectColorset 12
+*FvwmIconMan: FocusAndSelectColorset 12
+*FvwmIconMan: IconColorset 14
+*FvwmIconMan: IconAndSelectColorset 15
+*FvwmIconMan: DrawIcons always
+*FvwmIconMan: ReliefThickness 0
+*FvwmIconMan: Format "%t"
+*FvwmIconMan: Font "xft:Sans:Bold:size=8:antialias=True"
+
+# Button Actions
+*FvwmIconMan: Action Mouse 0 N sendcommand Nop
+*FvwmIconMan: Action Mouse 2 N sendcommand Nop
+*FvwmIconMan: Action Mouse 1 A sendcommand IconManClick
+*FvwmIconMan: Action Mouse 3 A sendcommand "Menu MenuIconOps"
+
+Style "FvwmIconMan" Sticky, NoHandles, WindowListSkip, !Borders, StaysOnTop, NoTitle
+
+! Menus
+Read "Menus.fvwm2rc"
+
+MenuStyle * MWM
+MenuStyle * PopupDelayed, PopupDelay 160, Animation, TitleWarp
+MenuStyle * Foreground gold, Background gray40
+MenuStyle * ActiveFore White
+MenuStyle * Font "xft:WenQuanYi Micro Hei:pixelsize=14:Medium"
+
+! Key Bindings
+Read "KeyBindings.fvwm2rc"
+! Windows Styles
+Colorset 0 fg white, bg #888888, fgsh black
+# Colorset 1 fg white, bg #ababab, fgsh black
+Colorset 1 fg white , bg grey,fgsh black,sh #666666,hi #bbbbff
+
+AddToDecor "glass" BorderStyle Active Colorset 1
+AddToDecor "glass" BorderStyle Inactive Colorset 0
+AddToDecor "glass" BorderStyle -- NoInset HiddenHandles
+
+AddToDecor "glass" TitleStyle Active Colorset 1
+AddToDecor "glass" TitleStyle Inactive Colorset 0
+AddToDecor "glass" TitleStyle -- flat
+
+AddToDecor "glass" TitleStyle Centered
+AddToDecor "glass" TitleStyle Height 24
++ TitleStyle Centered Height 18 -- Flat
++ ButtonStyle All ActiveUp Vector 5 15x15@4 15x85@3 85x85@3 85x15@3 15x15@3 -- Flat
++ ButtonStyle All ToggledActiveUp Vector 5 15x15@4 15x85@3 85x85@3 85x15@3 15x15@3 -- Flat
++ ButtonStyle All ActiveDown Vector 5 20x20@4 20x80@3 80x80@3 80x20@3 20x20@3 -- Flat
++ ButtonStyle All ToggledActiveDown Vector 5 20x20@4 20x80@3 80x80@3 80x20@3 20x20@3 -- Flat
++ ButtonStyle All Inactive Vector 5 47x47@3 47x53@3 47x53@3 47x47@3 47x47@3 -- Flat
++ AddButtonStyle 1 Active Vector 5 45x45@3 55x45@3 55x55@3 45x55@3 45x45@3
++ AddButtonStyle 2 Active Vector 4 35x35@3 65x65@3 65x35@4 35x65@3
++ AddButtonStyle 4 Active Vector 8 30x70@3 30x30@3 70x30@3 70x70@3 30x70@3 \
+        30x50@4 50x50@3 50x70@3
++ AddButtonStyle 4 ToggledActiveUp Vector 8 30x70@3 30x30@3 70x30@3 70x70@3 30x70@3 \
+        50x30@4 50x50@3 70x50@3
++ AddButtonStyle 6 Active Vector 5 35x60@3 65x60@3 65x50@3 35x50@3 35x60@3
++ ButtonStyle All - Clear
++ ButtonStyle 1 - MwmDecorMenu
++ ButtonStyle 4 - MwmDecorMax
++ ButtonStyle 6 - MwmDecorMin
+
++ TitleStyle CenterJustified Height 18
++ TitleStyle Height 18
++ BorderStyle Simple -- NoInset Flat
++ ButtonStyle All -- UseTitleStyle
+
+Style * UseDecor glass
+Style * Font "xft:WenQuanYi Micro Hei:pixelsize=12:Bold:Antialias=True"
+Style * IconFont "xft:WenQuanYi Micro Hei:pixelsize=12:Bold:Antialias=True"
+Style * BorderWidth 1, HandleWidth 1
+Style * MWMBorder, FirmBorder
+Style * DecorateTransient
+OpaqueMoveSize unlimited
+Style * ResizeOpaque
+Style * ClickToFocus
+Style * MouseFocusClickRaises
+Style * TileCascadePlacement
+Style * TitleAtBottom
+SnapAttraction 5 SameType Screen
+Style * SnapAttraction 5 SameType Screen
+Style * SnapGrid 3.3
+Style "FvwmPager"         StaysOnTop, Sticky, WindowListSkip, !Borders, NoHandles, CirculateSkipIcon, CirculateSkip
+Style "FvwmBanner"        StaysOnTop
+Style "FvwmButtons"       Icon toolbox.xpm, ClickToFocus
+Style "Wine*"             NoTitle, NoHandles, !Borders
+Style "*Cloud Music"      !Borders, NoHandles
+
+MenuStyle * PopupDelayed, PopupDelay 100, PopdownImmediately
+! Virtual Desktops
+DesktopSize 4x1
+EdgeScoll 0 0
+EdgeResistance 100000
+Style * EdgeMoveDelay 500
+Style * EdgeMoveResistance 100
+
+! Functions
+Read "Function.fvwm2rc"
+
+! Tmp
+
+DestroyModuleConfig FvwmTaskBar: *
+*FvwmTaskBar: Geometry 1920x24+0-0
+*FvwmTaskBar: Colorset 15
+*FvwmTaskBar: Frame 0
+*FvwmTaskBar: Font "xft:Sans:size=10:bold:antialias=True"
+*FvwmTaskBar: Rows 1
+*FvwmTaskBar: Columns 1200
+
+*FvwmTaskBar: (50x1, Title "Fvwm", ActiveColorset 16, Action(Mouse 1) \
+               Menu RootMenu Root 0 o100-24p, Frame 2)
+*FvwmTaskBar: (16x1, Icon "icons/terminal.svg:16x0" , ActiveColorset 16, \
+               Action(Mouse 1) "Exec exec urxvt")
+*FvwmTaskBar: (16x1, Icon "icons/google-chrome.svg:16x0", ActiveColorset 16, \
+               Action(Mouse 1) "Exec exec google-chrome-stable")
+
+*FvwmTaskBar: (1200x1, Left, Swallow TaskBarIcons 'Module FvwmIconMan \
+               TaskBarIcons')
+*FvwmTaskBar: (120x1, Swallow(NoClose, UseOld) stalonetray 'Exec exec stalonetray', Frame 0)
+*FvwmTaskBar: (120x1, Swallow FvwmPager 'Module FvwmPager')
+*FvwmTaskBar: (80x1, Swallow DateTime 'Module FvwmScript FvwmScript-Time', Frame 0))
+
+DestroyModuleConfig TaskBarIcons: *
+*TaskBarIcons: IconName TaskBarIcons
+*TaskBarIcons: UseWinList true
+*TaskBarIcons: Resolution global
+*TaskBarIcons: Tips needed
+*TaskBarIcons: Font "xft:Sans:size=8:antialias=True"
+
+# Manager Size
+*TaskBarIcons: ButtonGeometry 120x24
+*TaskBarIcons: MaxButtonWidth 120
+*TaskBarIcons: ManagerGeometry 1x1
+
+# Button Styles
+*TaskBarIcons: DrawIcons always
+*TaskBarIcons: ReliefThickness 2
+*TaskBarIcons: Format "%t"
+*TaskBarIcons: IconButton down
+*TaskBarIcons: IconAndSelectButton down
+*TaskBarIcons: SelectButton up
+*TaskBarIcons: Background #888888 ! #003c3c
+*TaskBarIcons: Foreground #ffffff
+*TaskBarIcons: PlainColorset 16
+*TaskBarIcons: FocusColorset 16
+*TaskBarIcons: FocusAndSelectColorset 16
+*TaskBarIcons: SelectColorset 16
+*TaskBarIcons: IconAndSelectColorset 16
+*TaskBarIcons: FollowFocus true
+*TaskBarIcons: Resolution page
+
+# Button Actions
+*TaskBarIcons: Action Mouse 1 A sendcommand IconManClick
+*TaskBarIcons: Action Mouse 2 A sendcommand Nop
+*TaskBarIcons: Action Mouse 3 A sendcommand "Menu MenuIconOps Mouse 0 o100"
+
+Style FvwmTaskBar !Title, !Borders, !Handles, Sticky, WindowListSkip, NeverFocus, StaysOnBottom
+
+
+DestroyDecor FvwmDecor
+AddToDecor   FvwmDecor
++ TitleStyle Centered Height 18 -- Flat
++ ButtonStyle All ActiveUp Vector 5 15x15@4 15x85@3 85x85@3 85x15@3 15x15@3 -- Flat
++ ButtonStyle All ToggledActiveUp Vector 5 15x15@4 15x85@3 85x85@3 85x15@3 15x15@3 -- Flat
++ ButtonStyle All ActiveDown Vector 5 20x20@4 20x80@3 80x80@3 80x20@3 20x20@3 -- Flat
++ ButtonStyle All ToggledActiveDown Vector 5 20x20@4 20x80@3 80x80@3 80x20@3 20x20@3 -- Flat
++ ButtonStyle All ToggledInactive Vector 5 47x47@3 57x53@3 53x53@3 53x47@3 47x47@3 -- Flat
+
++ ButtonStyle All Inactive Vector 5 40x47@3 50x47@3 55x47@3 50x47@3 40x47@3 -- Flat
+
++ AddButtonStyle 1 Active Vector 5 45x45@3 55x45@3 55x55@3 45x55@3 45x45@3
++ AddButtonStyle 2 Active Vector 4 35x35@3 65x65@3 65x35@4 35x65@3
++ AddButtonStyle 4 Active Vector 8 30x70@3 30x30@3 70x30@3 70x70@3 30x70@3 \
+        30x50@4 50x50@3 50x70@3
++ AddButtonStyle 4 ToggledActiveUp Vector 8 30x70@3 30x30@3 70x30@3 70x70@3 30x70@3 \
+        50x30@4 50x50@3 70x50@3
++ AddButtonStyle 6 Active Vector 5 35x60@3 65x60@3 65x50@3 35x50@3 35x60@3
++ ButtonStyle All - Clear
++ ButtonStyle 1 - MwmDecorMenu
++ ButtonStyle 4 - MwmDecorMax
++ ButtonStyle 6 - MwmDecorMin
+
+Style * NoIcon

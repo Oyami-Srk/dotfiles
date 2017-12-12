@@ -1,0 +1,21 @@
+hasSub=0
+echo 'DestroyMenu' ${1}'Menu'
+for i in $HOME/.fvwm/${1}/*
+do
+    if [ -d $i ]; then
+        hasSub=1
+    else
+        #awk 'END{var=FILENAME; n=split (var,a,/\//); print "+", a[n], "Exec exec", var}' $i;
+        echo "AddToMenu" ${1}"Menu" $(basename $i) "Exec exec" $i
+    fi
+done
+if [ $hasSub = 1 ]; then
+    echo 'AddToMenu' ${1}"Menu" '"" Nop'
+    for i in $HOME/.fvwm/${1}/*
+    do
+        if [ -d $i ]; then
+            echo "AddToMenu" ${1}Menu $(basename $i) "Popup" ${1}"/"$(basename $i)"Menu"
+            $HOME/.fvwm/gen-menu ${1}/$(basename $i)
+        fi
+    done
+fi
