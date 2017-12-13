@@ -3,6 +3,7 @@
 !.fvwm
 /.config/*
 !.config/i3
+!.config/compton.conf
 !.gitignore
 !.zshrc
 !.zshenv
