@@ -4,6 +4,7 @@
 /.config/*
 !.config/i3
 !.config/compton.conf
+!.config/ibus
 !.gitignore
 !.zshrc
 !.zshenv
