@@ -21,7 +21,8 @@ AddToFunc InitFunction
 + I Exec exec compton &
 + I Exec exec ibus-daemon -x -r -d
 + I Exec exec osd_clock -f 8x16 -c white -F %H:%M:%S -s 0 -t &osd_clock -f 8x16 -c white -F %H:%M:%S -s 0 -t &
-+ I Exec exec 
++ I Exec exec blueman-applet &
++ I Exec exec nm-applet &
 DestroyFunc ExitFunction
 AddToFunc ExitFunction
 + I All (xscreensaver) Close
