@@ -5,7 +5,7 @@
 !.config/i3
 !.config/compton.conf
 !.config/ibus
-/.config/bus
+/.config/ibus/bus
 /.config/ibus/rime/*.bin
 /.config/ibus/rime/*.userdb
 !.gitignore
