@@ -5,6 +5,8 @@
 !.config/i3
 !.config/compton.conf
 !.config/ibus
+/.config/ibus/rime/*.bin
+/.config/ibus/rime/*.userdb
 !.gitignore
 !.zshrc
 !.zshenv
