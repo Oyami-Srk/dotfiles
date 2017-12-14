@@ -1,21 +1,3 @@
-*FvwmTaskBar: Columns 1200
-# Menu Button
-*FvwmTaskBar: (55x1, Title "Fvwm", ActiveColorset 16, Action(Mouse 1)                Menu MenuFvwmRoot Root 0 o100-24p, Frame 2)
-# Quick Launch Buttons
-*FvwmTaskBar: (25x1, Icon "icons/mini/xterm.png", ActiveColorset 16,                Action(Mouse 1) "Exec exec xterm")
-*FvwmTaskBar: (25x1, Icon "icons/mini/firefox.png", ActiveColorset 16,                Action(Mouse 1) "Exec exec gimp")
-*FvwmTaskBar: (25x1, Icon "icons/mini/xteddy.png", ActiveColorset 16,                Action(Mouse 1) "Exec exec xteddy")
-# Swallow FvwmIconMan TaskBarIcons
-*FvwmTaskBar: (1015x1, Left, Swallow TaskBarIcons 'Module FvwmIconMan                TaskBarIcons')
-# Time Button with id TaskTime
-*FvwmTaskBar: (55x1, id "TaskTime", ActiveColorset 16, Title "Time")
-Module FvwmIconMan FvwmTaskBar
-Module FvwmTaskBar
-Module RightPanel
-DestroyModuleConfig RightPanel:*
-*RightPanel: Geometry 120x720-0+0
-*RightPanel: Colorset 10
-*RightPanel: Rows 720
 *RightPanel: Columns 120
 *RightPanel: Frame 0
 *RightPanel: Font "xft:Sans:Bold:size=10:antialias=True"
@@ -98,3 +80,21 @@ FvwmScript
 Module FvwmScript
 Drag
 Move
+move
+exec ibus-deamon
+exec ibus-daemon
+exit
+Style * HiddenHandles
+Style * NoInser HiddenHandles
+Style * NoInset HiddenHandles
+BorderStyle
+BorderStyle * NoInset
+BorderStyle -- NoInset
+BorderStyle -- NoInset HiddenHandles
+BorderStyle -- NoInset HiddenHandles
+BorderStyle -- NoInset Hidden
+BorderStyle -- NoInset HiddenBorder
+BorderStyle Active -- HiddenHandles NoInset
+Exec exec transset-df -i $[w.id] .7
+Exec exec aterm
+transset-df -i $[w.id] .7

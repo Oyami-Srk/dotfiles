@@ -21,6 +21,7 @@ Key   l      A        CS        FuncGotoPage +1p +0p
 Key   h      A        CSM       Current FuncMoveWindowToPage -1p +0p
 Key   l      A        CSM       Current FuncMoveWindowToPage +1p +0p
 
+Key F12      W        4         Exec exec transset-df -i $[w.id]
 
 Key Tab A 4 WindowList Root c c NoDeskSort
 Key D   A 4 Exec exec dmenu_run -fn 'Droid Sans Mono-10'
@@ -28,13 +29,13 @@ Key D   A 4 Exec exec dmenu_run -fn 'Droid Sans Mono-10'
 # Title Bar Button
 Mouse 1 6 A Iconify
 Mouse 1 2 A Close
-Mouse 3 4 A Maximize-Func
-Mouse 1 4 A MyMaximize
-Mouse 1 1 A WindowShade
+Mouse 1 4 A Maximize-Func
+Mouse 3 4 A MyMaximize
+Mouse 1 1 A MyWindowShade
 Mouse 1 3 A Stick
 Mouse 1 T A Func_Title
 
 Key T  A  4  ToggleTitle
 Key M  A  4  MyMaximize
 Key S  A  4  ToggleShaded
-
+Key R  W  4  iResize

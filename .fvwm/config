@@ -4,10 +4,12 @@ AddToFunc StartFunction
 + I Module FvwmAuto 500 Raise Nop
 + I Module FvwmAnimate
 + I Module FvwmCommandS
++ I Module FvwmEvent
 + I Module FvwmScript
 + I Module FvwmEvent
 + I Module FvwmButtons FvwmTaskBar
 + I Exec exec ~/.screenlayout/screen_init.sh
++ I Exec exec ~/.fvwm/Utilities/ChangeWallpaper
 + I GenMenu "Programs"
 + I GenMenu "Utilities"
 # + I Exec exec ~/.fvwm/dir-watch Programs &
@@ -20,7 +22,6 @@ AddToFunc InitFunction
 # + I Exec exec xcompmgr & # -c -C -t-5 -l-5 -r4.2 -o.55 &
 + I Exec exec compton &
 + I Exec exec ibus-daemon -x -r -d
-+ I Exec exec osd_clock -f 8x16 -c white -F %H:%M:%S -s 0 -t &osd_clock -f 8x16 -c white -F %H:%M:%S -s 0 -t &
 + I Exec exec blueman-applet &
 + I Exec exec nm-applet &
 DestroyFunc ExitFunction
@@ -86,6 +87,7 @@ DestroyModuleConfig FvwmIconMan: *
 
 Style "FvwmIconMan" Sticky, NoHandles, WindowListSkip, !Borders, StaysOnTop, NoTitle
 
+
 ! Menus
 Read "Menus.fvwm2rc"
 
@@ -134,11 +136,13 @@ AddToDecor "glass" TitleStyle Height 24
 + TitleStyle Height 18
 + BorderStyle Simple -- NoInset Flat
 + ButtonStyle All -- UseTitleStyle
++ BorderStyle All -- NoInset HiddenHandles
 
 Style * UseDecor glass
 Style * Font "xft:WenQuanYi Micro Hei:pixelsize=12:Bold:Antialias=True"
 Style * IconFont "xft:WenQuanYi Micro Hei:pixelsize=12:Bold:Antialias=True"
-Style * BorderWidth 1, HandleWidth 1
+Style * BorderWidth 0, HandleWidth 0
+Style * HiddenHandles
 Style * MWMBorder, FirmBorder
 Style * DecorateTransient
 OpaqueMoveSize unlimited

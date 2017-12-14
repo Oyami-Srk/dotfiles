@@ -18,9 +18,7 @@ AddToFunc   FuncSelectWindow
 
 DestroyFunc Maximize-Func
 AddToFunc Maximize-Func
-+         "M" Maximize 100 0
-+         "C" Maximize 80 0
-+         "D" Maximize 100 100
++         "C" Maximize 100 100
 
 DestroyFunc GenMenu
 AddToFunc GenMenu
@@ -60,5 +58,25 @@ AddToFunc Func_Title
 + "C"     Nop
 + "M"     Move
 + "D"     WindowShade
+
+DestroyFunc MyWindowShade
+AddToFunc MyWindowShade
++ "C"     WindowShade
++ "M"     Resize
+
+DestroyFunc iResize
+AddToFunc iResize
++ I Key h W A Resize w-2 w+0
++ I Key j W A Resize w+0  w-2
++ I Key k W A Resize w+0  w+2
++ I Key l W A Resize w+2 w+0
++ I Key q W A RemoveiResize
+
+DestroyFunc RemoveiResize
+AddToFunc   RemoveiResize
++ I Key h W A -
++ I Key j W A -
++ I Key k W A -
++ I Key l W A -
 
 # Modified Existed Func
