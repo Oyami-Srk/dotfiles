@@ -67,8 +67,8 @@ AddToFunc MyWindowShade
 DestroyFunc iResize
 AddToFunc iResize
 + I Key h W A Resize w-2 w+0
-+ I Key j W A Resize w+0  w-2
-+ I Key k W A Resize w+0  w+2
++ I Key j W A Resize w+0 w-2
++ I Key k W A Resize w+0 w+2
 + I Key l W A Resize w+2 w+0
 + I Key q W A RemoveiResize
 
@@ -78,5 +78,6 @@ AddToFunc   RemoveiResize
 + I Key j W A -
 + I Key k W A -
 + I Key l W A -
++ I Key q W A -
 
 # Modified Existed Func
