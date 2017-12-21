@@ -7,4 +7,4 @@ alias s=screen
 alias sl='screen -ls'
 alias sr='screen -r'
 alias pg=progress
-
+alias pc=proxychains

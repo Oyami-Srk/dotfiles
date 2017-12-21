@@ -1,6 +1,7 @@
 /*
 !.config
 !.fvwm
+/.fvwm/.FvwmConsole-History
 /.config/*
 !.config/i3
 !.config/compton.conf
