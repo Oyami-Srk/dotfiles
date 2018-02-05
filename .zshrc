@@ -1,99 +1,61 @@
 # Z-S-H Configruation file by Shrioko<hhx.xxm#gmail.com>
 
-# Var Defines
-ANTIGEN="$HOME/.local/bin/antigen.zsh"
-
-
-if [[ $TERM_PROGRAM == "iTerm.app" ]]; then
-    bindkey    "^[[3~"          delete-char
-    bindkey    "^[3;5~"         delete-char
+if [[ -o login ]]; then
+	[ -f "$HOME/.config/login.sh" ] && sh "$HOME/.config/login.sh"
 fi
 
-if [[ ! -f "$ANTIGEN" ]]; then
-    echo "Antigen wat not found... Install it!"
+ZGEN_PATH="$HOME/.config/zsh"
+ZGEN_SOURCE="${ZGEN_PATH}/zgen/zgen.zsh"
 
-    [[ ! -d "$HOME/.local" ]] && mkdir -p "$HOME/.local" 2> /dev/null
-    [[ ! -d "$HOME/.local/bin" ]] && mkdir -p "$HOME/.local/bin" 2> /dev/null
-    [[ ! -f "$HOME/.z" ]] && touch "$HOME/.z"
+if [[ ! -f "$ZGEN_SOURCE" ]]; then
+    echo "Zgen is missing... Install it!!!"
 
-    URL="http://git.io/antigen"
-    TMPFILE="/tmp/antigen.zsh"
+    [[ ! -d "$ZGEN_PATH" ]] && mkdir -p "$ZGEN_PATH" 2> /dev/null
 
-    if [[ -x "`which curl`" ]]; then
-        curl -L "$URL" -o "$TMPFILE" -s
-    elif [[ -x "`which wget`" ]]; then
-        wget "$URL" -o "$TMPFILE"
-    else
-        echo "Emmmm...Both curl and wget are missing, what are you using??"
+    repo_url="https://github.com/tarjoilija/zgen.git"
+
+    if [[ ! -x "`which git`" ]]; then
+        echo "WTF? Even git is missing..."
         exit
     fi
 
-    [[ ! $? == 0 ]] && echo "Download failed desu!!!" && exit
+    git clone https://github.com/tarjoilija/zgen.git "${ZGEN_PATH}/zgen"
 
-    mv "$TMPFILE" "$ANTIGEN"
-    [[ $? == 0 ]] && echo "Install completed~"
+    if [[ $? != 0 ]]; then
+        echo "Installation has failed, remove $ZGEN_PATH and try again..."
+        exit
+    else
+        echo "Install completed~"
+    fi
 fi
 
-# Output prompt
+# Load zgen
+source $ZGEN_SOURCE
 
-autoload -U colors && colors
+# if init script doesnt exist.
+if ! zgen saved; then
+    # Load base framework
+    zgen oh-my-zsh
+    # Load plugins
+    zgen oh-my-zsh plugins/git
+    zgen oh-my-zsh plugins/pip
+    zgen oh-my-zsh plugins/github
+    zgen oh-my-zsh plugins/python
+    zgen oh-my-zsh plugins/colorize
+    zgen oh-my-zsh plugins/sudo
 
-host_name="%{$fg[cyan]%}萌"
-path_string="%{$fg[yellow]%}%~"
-prompt_string="$"
-
-# Make prompt_string red if the previous command failed.
-local return_status="%(?:%{$fg[blue]%}$prompt_string:%{$fg[red]%}$prompt_string)"
-
-
-_git_branch_name() {
-    git branch 2>/dev/null | awk '/^\*/ { print $2 }'
-}
-_git_is_dirty() {
-    git diff --quiet 2> /dev/null || echo '*'
-}
-
-setopt prompt_subst 
-RPROMPT='$(_git_branch_name) $(_git_is_dirty)'
-
-# Initialize antigen
-source "$ANTIGEN"
+    # Load packages
+    zgen load zsh-users/zsh-syntax-highlighting
+    zgen load zsh-users/zsh-autosuggestions
+    zgen load zsh-users/zsh-completions src
+    zgen load Vifon/deer
+    zgen load Tarrasch/zsh-bd
 
 
-# Initialize oh-my-zsh
-antigen use oh-my-zsh
-
-
-PROMPT="${host_name} ${path_string} ${return_status} %{$reset_color%}"
-
-# default bundles
-# visit https://github.com/unixorn/awesome-zsh-plugins
-# antigen bundle git
-# antigen bundle heroku
-antigen bundle pip
-antigen bundle svn-fast-info
-# antigen bundle command-not-find
-
-antigen bundle colorize
-antigen bundle github
-antigen bundle python
-antigen bundle rupa/z z.sh
-# antigen bundle z
-
-antigen bundle zsh-users/zsh-autosuggestions
-antigen bundle zsh-users/zsh-completions
-# antigen bundle supercrabtree/k
-antigen bundle Vifon/deer
-
-# uncomment the line below to enable theme
-# antigen theme fishy
-
-
-# check login shell
-if [[ -o login ]]; then
-	[ -f "$HOME/.local/etc/login.sh" ] && source "$HOME/.local/etc/login.sh"
-	[ -f "$HOME/.local/etc/login.zsh" ] && source "$HOME/.local/etc/login.zsh"
+    # Save init script
+    zgen save
 fi
+
 
 # syntax color definition
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
@@ -125,27 +87,28 @@ ZSH_HIGHLIGHT_STYLES[dollar-double-quoted-argument]=fg=009
 ZSH_HIGHLIGHT_STYLES[back-double-quoted-argument]=fg=009
 ZSH_HIGHLIGHT_STYLES[assign]=none
 
-# load local config
-[ -f "$HOME/.local/etc/config.zsh" ] && source "$HOME/.local/etc/config.zsh" 
-[ -f "$HOME/.local/etc/local.zsh" ] && source "$HOME/.local/etc/local.zsh"
+ZSH_AUTOSUGGEST_USE_ASYNC=true
 
-# enable syntax highlighting
-antigen bundle zsh-users/zsh-syntax-highlighting
+# Theme
+local ret_status="%F{blue}[%s%?]"
+PROMPT='%F{green}%2c%F{blue} λ%f '
+RPROMPT='$(git_prompt_info) %F{green}%D{%H:%M:%S} $ret_status'
 
-antigen apply
+ZSH_THEME_GIT_PROMPT_PREFIX="%F{yellow}"
+ZSH_THEME_GIT_PROMPT_SUFFIX="%f"
+ZSH_THEME_GIT_PROMPT_DIRTY=" %F{red}*%f"
+ZSH_THEME_GIT_PROMPT_CLEAN=""
 
-# setup for deer
+# KeyBinds & Setup
 autoload -U deer
 zle -N deer
 
-PROMPT="${host_name} ${path_string} ${return_status} %{$reset_color%}"
 # default keymap
-bindkey -s '\ee' 'vim\n'
 bindkey '\eh' backward-char
 bindkey '\el' forward-char
 bindkey '\ej' down-line-or-history
 bindkey '\ek' up-line-or-history
-# bindkey '\eu' undo
+
 bindkey '\eH' backward-word
 bindkey '\eL' forward-word
 bindkey '\eJ' beginning-of-line
@@ -154,19 +117,11 @@ bindkey '\eK' end-of-line
 bindkey -s '\eo' 'cd ..\n'
 bindkey -s '\e;' 'll\n'
 
-bindkey '\e[1;3D' backward-word
-bindkey '\e[1;3C' forward-word
-bindkey '\e[1;3A' beginning-of-line
-bindkey '\e[1;3B' end-of-line
-
 bindkey '\ev' deer
+bindkey '\ec' autosuggest-clear
 
+# alias
 alias ll='ls -l'
-
-
-# source function.sh if it exists
-[ -f "$HOME/.local/etc/function.sh" ] && . "$HOME/.local/etc/function.sh"
-
 
 # ignore complition
 zstyle ':completion:*:complete:-command-:*:*' ignored-patterns '*.pdf|*.exe|*.dll'
