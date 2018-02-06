@@ -50,7 +50,7 @@ if ! zgen saved; then
     zgen load zsh-users/zsh-completions src
     zgen load Vifon/deer
     zgen load Tarrasch/zsh-bd
-
+    zgen load djui/alias-tips
 
     # Save init script
     zgen save
@@ -123,5 +123,7 @@ bindkey '\ec' autosuggest-clear
 # alias
 alias ll='ls -l'
 
-# ignore complition
-zstyle ':completion:*:complete:-command-:*:*' ignored-patterns '*.pdf|*.exe|*.dll'
+# Turn off case-sensitive
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+bindkey "^[OA" history-beginning-search-backward
+bindkey "^[OB" history-beginning-search-forward
