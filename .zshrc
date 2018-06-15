@@ -102,7 +102,7 @@ fi
 
 # Theme
 local ret_status="%F{blue}[%s%?]"
-PROMPT='%F{green}%2c%F{blue} λ%f '
+PROMPT='%F{green}%2c%F{blue} λ  %f'
 RPROMPT='$(git_prompt_info) %F{green}%D{%H:%M:%S} $ret_status'
 
 ZSH_THEME_GIT_PROMPT_PREFIX="%F{yellow}"
@@ -145,5 +145,7 @@ zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 bindkey "^[OA" history-beginning-search-backward
 bindkey "^[OB" history-beginning-search-forward
 
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+if [[ $TERM_PROGRAM =~ "iTerm" ]]; then
+    test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+fi
 

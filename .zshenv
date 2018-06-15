@@ -16,3 +16,4 @@ alias pc=proxychains
 alias py=python3
 alias py2=python2.7
 alias enw=emacs -nw
+alias python=py
