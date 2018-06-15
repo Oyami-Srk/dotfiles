@@ -6,6 +6,10 @@ export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 export SSH_KEY_PATH="~/.ssh/id_rsa"
 export PATH="/Users/shiroko/node_modules/tern/bin/:$PATH"
 
+# homebrew
+export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles
+
+
 alias emacs='emacsclient -a "" -c'
 alias e=emacs
 alias s=screen
