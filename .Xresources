@@ -40,10 +40,12 @@ URxvt.saveLines:3000
 !!边框
 URxvt.borderLess:False
 !!字体设置
-Xft.dpi:96
+
 URxvt.font:xft:Source Code Pro for Powerline:size=11:style=Medium:antialias=true,xft:Source Code Pro for Powerline:size=10:style=Medium:antialias=true
 
 URxvt.boldfont:xft:Source Code Pro for Powerline:size=11:style=Bold:antialias=true,xft:Source Code Pro for Powerline:size=10:style=Bold:antialias=true
 !!C/P
-URxvt.keysym.Shift-Control-V: eval:paste_clipboard
-URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
+URxvt.keysym.Shift-Meta-V: eval:paste_clipboard
+URxvt.keysym.Shift-Meta-C: eval:selection_to_clipboard
+
+Xft.dpi: 144

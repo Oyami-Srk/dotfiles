@@ -7,8 +7,7 @@
 !.config/compton.conf
 !.config/ibus
 /.config/ibus/bus
-/.config/ibus/rime/*.bin
-/.config/ibus/rime/*.userdb
+/.config/ibus/rime/
 !.gitignore
 !.zshrc
 !.zshenv

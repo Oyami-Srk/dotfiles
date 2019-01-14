@@ -2,8 +2,7 @@
 
 # Startup
 exec --no-startup-id $HOME/Scripts/ChangeBG.sh
-# exec --no-startup-id fcitx
-exec --no-startup-id ibus-daemon --xim -d -r
+exec --no-startup-id fcitx
 exec --no-startup-id "ssr start"
 # exec --no-startup-id "xcompmgr -c -C -t-5 -l-5 -r4.2 -o.55 &"
 exec --no-startup-id compton
@@ -173,15 +172,14 @@ new_window none
 new_float normal
 focus_follows_mouse no
 
-for_window [class="Pcmanfm"] floating enable
-for_window [class="pcmanfm"] border none
+for_window [class="Nautilus"] floating enable
+for_window [class="nautilus"] border none
 
 
 set $mode_sys 系统选项：锁屏（L）；注销（O）；重启（R）；关机（S）；取消（Esc）
 bindsym Pause mode "$mode_sys"
-bindsym $mod+P mode "$mode_sys"
 mode "$mode_sys"{
-	  bindsym l exec --no-startup-id i3lock -c 000000 -g, mode "default"
+	  bindsym l exec --no-startup-id i3lock -c 000000 -f, mode "default"
 	  bindsym o exec --no-startup-id i3-msg exit, mode "default"
   	bindsym r exec --no-startup-id reboot, mode "default"
   	bindsym s exec --no-startup-id poweroff, mode "default"
@@ -189,11 +187,11 @@ mode "$mode_sys"{
     bindsym Return mode "default"
 }
 
-set $mode_exec 启动程序：Chrome（C）；PCMANFM（P）；Terminal（T）；取消（Esc）
+set $mode_exec 启动程序：Chrome（C）；Nautilus（N）；Terminal（T）；取消（Esc）
 bindsym $mod+y mode "$mode_exec"
 mode "$mode_exec"{
      bindsym c exec google-chrome-stable, mode "default"
-     bindsym p exec pcmanfm, mode "default"
+     bindsym n exec nautilus, mode "default"
      bindsym t exec i3-sensible-terminal, mode "default"
      bindsym Escape mode "default"
      bindsym Return mode "default"
@@ -201,9 +199,9 @@ mode "$mode_exec"{
 
 bindsym Print exec scrot -q 100 $HOME/Pictures/Screenshots/`date +%Y-%m-%d_%H:%M:%S`.png
 bindsym $mod+Print exec scrot -q 100 -u $HOME/Pictures/Screenshots/`date +%Y-%m-%d_%H:%M:%S`.png
-bindsym XF86AudioRaiseVolume exec amixer -D pulse set Master 5%+
-bindsym XF86AudioLowerVolume exec amixer -D pulse set Master 5%-
-bindsym XF86AudioMute exec amixer -D pulse set Master toggle
+bindsym XF86AudioRaiseVolume exec amixer set Master playback 3276.75+
+bindsym XF86AudioLowerVolume exec amixer set Master playback 3276.75-
+bindsym XF86AudioMute exec amixer set Master toggle
 
 #gaps
 #for_window [class="^.*"] border pixel 0

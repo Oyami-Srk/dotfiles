@@ -1,9 +1,0 @@
-var:
-  option:
-    ascii_punct: true
-    simplification: true
-  previously_selected_schema: double_pinyin
-  schema_access_time:
-    double_pinyin: 1511955457
-    luna_pinyin: 1511955409
-    wubi86: 1511955448
