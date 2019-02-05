@@ -62,6 +62,7 @@ values."
      xkcd
      ;; Applications
      search-engine
+     extra-langs
      ranger
      ;; Language
      asm
@@ -73,7 +74,7 @@ values."
      c-c++
      (c-c++ :variables
             c-c++-enable-clang-support t
-            c-c++-default-mode-for-headers 'c++-mode)
+            c-c++-default-mode-for-headers 'c-mode)
      semantic
      ansible
      cscope
@@ -86,7 +87,8 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '()
+   dotspacemacs-additional-packages '(
+                                      yasnippet-snippets)
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
@@ -337,8 +339,9 @@ executes.
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
   (setq ns-use-srgb-colorspace nil)
+  (setq-default sp-escape-quotes-after-inser nil)
   ;; (setq ycmd-server-command (list "python" "/home/shiroko/Development/ycmd/ycmd"))
-  (setq ycmd-server-command (list "python" (file-truename "~/Development/ycmd/ycmd")))
+  (setq ycmd-server-command (list "python3" (file-truename "~/Development/ycmd/ycmd")))
   (setq ycmd-request-message-level -1)
   (when (spacemacs/system-is-mac)
     (dolist (charset '(kana han symbol cjk-misc bopomofo))
@@ -408,10 +411,5 @@ you should place your code here."
  '(evil-want-Y-yank-to-eol nil)
  '(package-selected-packages
    (quote
-    (jinja2-mode company-ansible ansible-doc ansible vmd-mode sass-mode company-web web-mode tagedit slim-mode scss-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode web-completion-data go-guru go-eldoc company-go go-mode pyim pyim-basedict org-mime ghub helm-gtags ggtags yaml-mode x86-lookup nasm-mode pangu-spacing find-by-pinyin-dired ace-pinyin pinyinlib ranger flycheck-ycmd flycheck-pos-tip pos-tip flycheck wgrep smex ivy-hydra counsel-projectile counsel swiper ivy stickyfunc-enhance srefactor helm-cscope xcscope company-ycmd ycmd request-deferred let-alist deferred engine-mode web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc company-tern dash-functional tern coffee-mode xkcd geiser yapfify pyvenv pytest pyenv-mode py-isort pip-requirements live-py-mode hy-mode helm-pydoc cython-mode company-anaconda anaconda-mode pythonic disaster company-c-headers cmake-mode clang-format rainbow-mode rainbow-identifiers helm-company helm-c-yasnippet fuzzy evil-commentary company-statistics company color-identifiers-mode auto-yasnippet yasnippet ac-ispell auto-complete org-projectile org-pomodoro alert log4e evil-magit xterm-color smeargle shell-pop reveal-in-osx-finder pbcopy osx-trash osx-dictionary orgit org-category-capture org-present gntp org-download multi-term mmm-mode markdown-toc markdown-mode magit-gitflow magit launchctl htmlize helm-gitignore gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md magit-popup git-commit with-editor eshell-z eshell-prompt-extras esh-help org-plus-contrib spinner adaptive-wrap ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav dumb-jump f dash s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent ace-window ace-link ace-jump-helm-line helm avy helm-core popup async))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+    (yasnippet-snippets thrift stan-mode scad-mode qml-mode matlab-mode julia-mode arduino-mode jinja2-mode company-ansible ansible-doc ansible vmd-mode sass-mode company-web web-mode tagedit slim-mode scss-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode web-completion-data go-guru go-eldoc company-go go-mode pyim pyim-basedict org-mime ghub helm-gtags ggtags yaml-mode x86-lookup nasm-mode pangu-spacing find-by-pinyin-dired ace-pinyin pinyinlib ranger flycheck-ycmd flycheck-pos-tip pos-tip flycheck wgrep smex ivy-hydra counsel-projectile counsel swiper ivy stickyfunc-enhance srefactor helm-cscope xcscope company-ycmd ycmd request-deferred let-alist deferred engine-mode web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc company-tern dash-functional tern coffee-mode xkcd geiser yapfify pyvenv pytest pyenv-mode py-isort pip-requirements live-py-mode hy-mode helm-pydoc cython-mode company-anaconda anaconda-mode pythonic disaster company-c-headers cmake-mode clang-format rainbow-mode rainbow-identifiers helm-company helm-c-yasnippet fuzzy evil-commentary company-statistics company color-identifiers-mode auto-yasnippet yasnippet ac-ispell auto-complete org-projectile org-pomodoro alert log4e evil-magit xterm-color smeargle shell-pop reveal-in-osx-finder pbcopy osx-trash osx-dictionary orgit org-category-capture org-present gntp org-download multi-term mmm-mode markdown-toc markdown-mode magit-gitflow magit launchctl htmlize helm-gitignore gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md magit-popup git-commit with-editor eshell-z eshell-prompt-extras esh-help org-plus-contrib spinner adaptive-wrap ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav dumb-jump f dash s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent ace-window ace-link ace-jump-helm-line helm avy helm-core popup async))))
+
