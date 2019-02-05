@@ -171,7 +171,7 @@ values."
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
    dotspacemacs-default-font '("Source Code Pro for Powerline"
-                               :size 13
+                               ;; :size 13
                                :weight normal
                                :width normal
                                :powerline-scale 1.1)
@@ -351,10 +351,10 @@ before packages are loaded. If you are unsure, you should try in setting them in
     )
 
   (when (spacemacs/system-is-linux)
-    (dolist (charset '(kana han symbol cjk-misc bopomofo))
-      (set-fontset-font (frame-parameter nil 'font)
-                        charset (font-spec :family "文泉驿等宽微米黑"
-                                           :size 16)))
+    ;; (dolist (charset '(kana han symbol cjk-misc bopomofo))
+      ;; (set-fontset-font (frame-parameter nil 'font)
+                        ;; charset (font-spec :family "文泉驿等宽微米黑"
+                                           ;; :size 16)))
     )
   (setq configuration-layer--elpa-archives
         '(("melpa-cn" . "http://elpa.zilongshanren.com/melpa/")
