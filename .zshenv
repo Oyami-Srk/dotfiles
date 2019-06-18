@@ -22,3 +22,7 @@ alias py=python3
 alias py2=python2.7
 alias enw=emacs -nw
 alias python=py
+alias vim='nvim'
+
+export VIM=/usr/local/share/nvim
+export VIMRUNTIME=/usr/local/share/nvim/runtime

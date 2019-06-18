@@ -1,5 +1,7 @@
 # Z-S-H Configruation file by Shrioko<hhx.xxm#gmail.com>
 
+export LC_CTYPE=en_US.UTF-8
+
 if [[ -o login ]]; then
 	[ -f "$HOME/.config/login.sh" ] && sh "$HOME/.config/login.sh"
 fi
@@ -158,3 +160,6 @@ PERL_LOCAL_LIB_ROOT="/Users/shiroko/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LI
 PERL_MB_OPT="--install_base \"/Users/shiroko/perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=/Users/shiroko/perl5"; export PERL_MM_OPT;
 export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles
+
+KEYTIMEOUT=1
+export TERM=xterm-256color
