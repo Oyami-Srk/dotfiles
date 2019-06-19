@@ -51,7 +51,7 @@
     },
     "f": {
         "name": "+file",
-        "f": [":Denite file", "open-file"],
+        "f": [":Leaderf file", "open-file"],
         "w": [":w", "write-file"],
         "e": [":e ~/.config/nvim/init.vim", "open-config"],
         "t": [":NERDTreeToggle", "goto-type-definition"],
@@ -60,7 +60,8 @@
     "<Tab>": [":bn", "next-buffer"],
     "b": {
         "name": "+buffer",
-        "b": [":Denite buffer", "open-buffer"],
+        "b": [":Leaderf buffer", "open-buffer"],
+        "f": [":Leaderf buffer", "open-buffer"],
         "1": [":b1", "buffer-1"],
         "2": [":b2", "buffer-2"],
         "3": [":b3", "buffer-3"],
@@ -70,7 +71,7 @@
         "7": [":b7", "buffer-7"],
         "8": [":b8", "buffer-8"],
         "9": [":b9", "buffer-9"],
-        "d": [":bd", "delete-buffer"],
+        "d": [":Bclose", "delete-buffer"],
         "n": [":bn", "next-buffer"],
         "p": [":bp", "prev-buffer"],
         "l": [":ls", "list-buffer"]
@@ -86,6 +87,7 @@
     "9": [":9wincmd w", "window-9"],
     " ": "clear-highlight",
     ";": ["<Plug>NERDCommenterToggle", "toggle-comment"],
+    "e": ["<Plug>(easymotion-prefix)", "easy-motion"],
     "c": {
         "name": "+comment",
         "t": ["<Plug>NERDCommenterToggle", "toggle-comment"],

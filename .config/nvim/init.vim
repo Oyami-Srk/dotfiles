@@ -53,7 +53,6 @@ set clipboard=unnamedplus
 " Plugins
 call plug#begin()
 
-Plug 'altercation/vim-colors-solarized'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 " Plug 'junegunn/vim-easy-align'
@@ -61,18 +60,20 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'liuchengxu/vim-which-key'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " pip3 install --user pynvim
-Plug 'Shougo/denite.nvim', {'do': ':UpdateRemotePlugins'}
-" Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
+"Plug 'Shougo/denite.nvim', {'do': ':UpdateRemotePlugins'}
+Plug 'Yggdroot/LeaderF', { 'do': './install.sh', 'on': 'Leaderf'}
 Plug 'junegunn/vim-easy-align'
 Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}
 Plug 'Xuyuanp/nerdtree-git-plugin', {'on': 'NERDTreeToggle'}
 Plug 'scrooloose/nerdcommenter'
 Plug 'flazz/vim-colorschemes'
-Plug 'mg979/vim-visual-multi'
+"Plug 'mg979/vim-visual-multi'
 Plug 'honza/vim-snippets'
 Plug 'mhinz/vim-startify'
-Plug 'francoiscabrol/ranger.vim'
+Plug 'francoiscabrol/ranger.vim', {'on': 'Ranger'}
 Plug 'rbgrouleff/bclose.vim'
+" Plug 'airblade/vim-gitgutter'
+Plug 'easymotion/vim-easymotion'
 
 call plug#end()
 
@@ -81,18 +82,6 @@ set background=dark
 colorscheme Tomorrow-Night
 
 " Key Bindings
-map <space> <leader>
-set timeoutlen=300 ttimeoutlen=0
-let g:which_key_map = {}
-call which_key#register('<Space>', "g:which_key_map")
-nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
-vnoremap <silent> <leader> :WhichKeyVisual '<Space>'<CR>
-if filereadable(expand("~/.config/nvim/keybindings.vim"))
-    " load keymap from file
-    source ~/.config/nvim/keybindings.vim
-endif
-" Some key not work in which-key plugin
-nnoremap <silent> <leader><space> :noh<CR>
 
 " Unmap some keybindings provided by plugin
 silent! unmap <leader>cc
@@ -109,6 +98,19 @@ silent! unmap <leader>cl
 silent! unmap <leader>cu
 silent! unmap <leader>cb
 
+map <space> <leader>
+set timeoutlen=300 ttimeoutlen=0
+let g:which_key_map = {}
+call which_key#register('<Space>', "g:which_key_map")
+nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
+vnoremap <silent> <leader> :WhichKeyVisual '<Space>'<CR>
+if filereadable(expand("~/.config/nvim/keybindings.vim"))
+    " load keymap from file
+    source ~/.config/nvim/keybindings.vim
+endif
+" Some key not work in which-key plugin
+nnoremap <silent> <leader><space> :noh<CR>
+map , <Plug>(easymotion-prefix)
 
 " Airline
 let g:airline_powerline_fonts = 1
@@ -223,22 +225,10 @@ let g:NERDTreeShowLineNumbers = 1
 " Ranger
 let g:ranger_map_keys = 0
 
-" Denite
-" Define mappings
-autocmd FileType denite call s:denite_my_settings()
-function! s:denite_my_settings() abort
-  nnoremap <silent><buffer><expr> <CR>
-  \ denite#do_map('do_action')
-  nnoremap <silent><buffer><expr> d
-  \ denite#do_map('do_action', 'delete')
-  nnoremap <silent><buffer><expr> p
-  \ denite#do_map('do_action', 'preview')
-  nnoremap <silent><buffer><expr> q
-  \ denite#do_map('quit')
-  nnoremap <silent><buffer><expr> i
-  \ denite#do_map('open_filter_buffer')
-  nnoremap <silent><buffer><expr> <Space>
-  \ denite#do_map('toggle_select').'j'
-endfunction
+" EasyMotion
+let g:EasyMotion_smartcase = 1
 
-
+" LeaderF
+let g:Lf_ShortcutF = ''
+let g:Lf_ShortcutB = ''
+let g:Lf_CommandMap = {'<C-K>': ['<Up>'], '<C-J>': ['<Down>']}
