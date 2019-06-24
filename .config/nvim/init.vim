@@ -79,7 +79,10 @@ call plug#end()
 
 syntax enable
 set background=dark
-colorscheme Tomorrow-Night
+colorscheme gruvbox
+" molokai janah seoul256 desert256v2 blackdust colorsbox-material
+
+
 
 " Key Bindings
 
