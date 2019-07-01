@@ -40,12 +40,28 @@ URxvt.saveLines:3000
 !!边框
 URxvt.borderLess:False
 !!字体设置
-
 URxvt.font:xft:Source Code Pro for Powerline:size=11:style=Medium:antialias=true,xft:Source Code Pro for Powerline:size=10:style=Medium:antialias=true
-
 URxvt.boldfont:xft:Source Code Pro for Powerline:size=11:style=Bold:antialias=true,xft:Source Code Pro for Powerline:size=10:style=Bold:antialias=true
 !!C/P
 URxvt.keysym.Shift-Meta-V: eval:paste_clipboard
 URxvt.keysym.Shift-Meta-C: eval:selection_to_clipboard
 
-Xft.dpi: 144
+!!xterm
+XTerm*metaSendsEscape: true
+XTerm*eightBitInput: false
+XTerm*faceName: Source Code Pro for Powerline:size=11:style=medium:antialias=true
+XTerm*faceNameDoublesize: WenQuanYi Micro Hei Mono:size=10
+XTerm*faceSize: 8
+XTerm*locale: zh_CN.UTF-8
+XTerm*utf8: true
+XTerm*utf8Title: true
+
+
+
+
+
+
+
+
+
+Xft.dpi: 96

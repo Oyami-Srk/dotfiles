@@ -25,5 +25,10 @@ alias python=py
 alias vim='nvim'
 alias vi='nvim'
 
-export VIM=/usr/local/share/nvim
-export VIMRUNTIME=/usr/local/share/nvim/runtime
+#export VIM=/usr/local/share/nvim
+#export VIMRUNTIME=/usr/local/share/nvim/runtime
+
+export EDITOR=nvim
+if [ "$(uname 2> /dev/null)" = "Linux" ]; then
+    export TERMINAL=termite
+fi

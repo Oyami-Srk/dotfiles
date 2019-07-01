@@ -31,7 +31,7 @@ conky.config = {
 }
 
 conky.text = [[
-GPU温度:${exec nvidia-smi -q -d TEMPERATURE | grep "GPU Current Temp" | cut -c39-40}.0°C \
+GPU温度:${exec sensors nouveau-pci-0100 | grep 'temp1' | cut -c16-23} \
 CPU温度:${exec sensors | grep 'Core 0' | cut -c17-23}|${exec sensors | grep 'Core 1' | cut -c17-23}|${exec sensors | grep 'Core 2' | cut -c17-23}|${exec sensors | grep 'Core 3' | cut -c17-23} \
  ${upspeed enp3s0}/s  ${downspeed enp3s0}/s \
  ${cpu}% \
