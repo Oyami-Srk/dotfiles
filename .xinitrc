@@ -6,4 +6,5 @@ export XMODIFIERS=@im=ibus
 export QT_IM_MODULE=ibus
 xrdb -merge ~/.Xresources
 #exec fvwm
+#exec ratpoison
 exec i3

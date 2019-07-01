@@ -9,14 +9,12 @@ patch:
     - schema: nihongo-r
   "switcher/caption": 〔方案选单〕
   "switcher/hotkeys":
-    __include: default:/switcher/hotkeys
-    __append:
       - Control+equal
   "ascii_composer/good_old_caps_lock": false
   "ascii_composer/switch_key":
     Caps_Lock: commit_code
     Shift_L: noop
-    Shift_R: commit_code
+    Shift_R: noop
     Control_L: noop
     Control_R: noop
   "menu/page_size": 9

@@ -4,11 +4,11 @@
 exec --no-startup-id $HOME/Scripts/ChangeBG.sh
 # exec --no-startup-id fcitx
 exec --no-startup-id ibus-daemon --xim -d -r
-exec --no-startup-id "ssr start"
+#exec --no-startup-id "ssr start"
 # exec --no-startup-id "xcompmgr -c -C -t-5 -l-5 -r4.2 -o.55 &"
-exec --no-startup-id compton
+exec --no-startup-id compton --vsync -c -f -l -10 -t -10 -o 0.7
 exec --no-startup-id keynav
-exec --no-startup-id nm-applet
+# exec --no-startup-id nm-applet
 # End of Startup
 
 # Set Win-key as mod-key
@@ -131,11 +131,11 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 # define colors used
-set $bg-color 	         #2f343f30
-set $inactive-bg-color   #2f343f30
+set $bg-color 	         #2f343faa
+set $inactive-bg-color   #2f343fbb
 set $text-color          #f3f4f5
 set $inactive-text-color #676E7D
-set $urgent-bg-color     #5294e200
+set $urgent-bg-color     #5294e299
 
 bar {
     tray_output primary
@@ -152,7 +152,7 @@ bar {
            focused_workspace  $bg-color          $bg-color          $text-color
            inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
            urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
-           background #00000000
+           background #000000aa
            # Set the color of i3bar's text
            statusline #fefefeFF
         } 
@@ -174,7 +174,7 @@ new_float normal
 focus_follows_mouse no
 
 for_window [class="Pcmanfm"] floating enable
-for_window [class="pcmanfm"] border none
+for_window [class="pcmanfm"] border normal
 
 
 set $mode_sys 系统选项：锁屏（L）；注销（O）；重启（R）；关机（S）；取消（Esc）
@@ -189,10 +189,10 @@ mode "$mode_sys"{
     bindsym Return mode "default"
 }
 
-set $mode_exec 启动程序：Chrome（C）；PCMANFM（P）；Terminal（T）；取消（Esc）
+set $mode_exec 启动程序：Firefox（F）；PCMANFM（P）；Terminal（T）；取消（Esc）
 bindsym $mod+y mode "$mode_exec"
 mode "$mode_exec"{
-     bindsym c exec google-chrome-stable, mode "default"
+     bindsym f exec firefox, mode "default"
      bindsym p exec pcmanfm, mode "default"
      bindsym t exec i3-sensible-terminal, mode "default"
      bindsym Escape mode "default"
