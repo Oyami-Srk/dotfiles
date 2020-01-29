@@ -6,6 +6,7 @@
 !.config/i3
 !.config/compton.conf
 !.config/ibus
+!.tmux
 /.config/ibus/bus
 /.config/ibus/rime/
 !.config/ubin
