@@ -62,6 +62,7 @@ if [[ ! -f "$ZGEN_SOURCE" ]]; then
         exit
     else
         echo "Install completed~"
+        echo "You can use envhelp restore to install packages backuped before."
     fi
 fi
 
