@@ -1,0 +1,47 @@
+tap "homebrew/bundle"
+tap "homebrew/core"
+# Like cat but displays content with syntax highlighting
+brew "ccat"
+# Formatting tools for C, C++, Obj-C, Java, JavaScript, TypeScript
+brew "clang-format", args: ["HEAD"]
+# C/C++ language server
+brew "cquery", args: ["HEAD"]
+# Distributed revision control system
+brew "git"
+# Mac App Store command-line interface
+brew "mas"
+# Netwide Assembler (NASM) is an 80x86 assembler
+brew "nasm"
+# Ambitious Vim-fork focused on extensibility and agility
+brew "neovim"
+# Platform built on V8 to build network applications
+brew "node"
+# Hook preloader
+brew "proxychains-ng"
+# Interpreted, interactive, object-oriented programming language
+brew "python"
+# Low-level access to audio, keyboard, mouse, joystick, and graphics
+brew "sdl2"
+# Terminal multiplexer
+brew "tmux"
+# Display directories as trees (with optional color/HTML output)
+brew "tree"
+# Sends magic packets to wake up network-devices
+brew "wakeonlan"
+# FSF Binutils for x86_64-elf cross development
+brew "x86_64-elf-binutils"
+# The GNU compiler collection for x86_64-elf
+brew "x86_64-elf-gcc"
+mas "Fresco", id: 1251572132
+mas "Keynote 讲演", id: 409183694
+mas "LastPass", id: 926036361
+mas "LyricsX", id: 1254743014
+mas "Magnet", id: 441258766
+mas "Microsoft OneNote", id: 784801555
+mas "Numbers 表格", id: 409203825
+mas "Pages 文稿", id: 409201541
+mas "Pine Player", id: 1112075769
+mas "QQ", id: 451108668
+mas "Xcode", id: 497799835
+mas "Xnip", id: 1221250572
+mas "库乐队", id: 682658836

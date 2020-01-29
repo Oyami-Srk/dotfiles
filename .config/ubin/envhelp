@@ -1,0 +1,55 @@
+#!/bin/sh
+
+BACKUP_FILES_DIR="$HOME/.config"
+
+echo envhelp is running under $PLATFORM.
+
+function backup()
+{
+    if [[ $PLATFORM == "Darwin" ]]; then
+        which "brew" >/dev/null 2>&1
+        if [ $? -ne 0 ]; then
+            echo Please ensure \"homebrew\" is installed.
+            exit 1
+        fi
+        brew bundle dump --describe --force --file="$BACKUP_FILES_DIR/brewbundle.txt"
+        echo Backup done.
+    fi
+    return 0
+}
+
+function help()
+{
+    echo "Usage: pkghelper [command]"
+    echo "command:"
+    echo "backup: backup packages"
+    return 0
+}
+
+function restore()
+{
+    if [[ $PLATFORM == "Darwin" ]]; then
+        echo Restore for macos
+        /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+        brew install mas
+        brew bundle --file="$HOME/.config/brewbundle.txt"
+    fi
+    which "python3" >/dev/null 2>&1
+    if [ $? -eq 0 ]; then
+        python3 -m ensurepip
+        python3 -m pip install neovim
+    fi
+}
+
+case $1 in
+    (backup)
+        backup
+        ;;
+    (restore)
+        restore
+        ;;
+    (*)
+    help
+        ;;
+esac
+

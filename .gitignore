@@ -8,6 +8,7 @@
 !.config/ibus
 /.config/ibus/bus
 /.config/ibus/rime/
+!.config/ubin
 !.gitignore
 !.zshrc
 !.zshenv
