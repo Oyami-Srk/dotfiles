@@ -13,9 +13,11 @@ set t_Co=256
 set termguicolors
 
 " Correct RGB escape codes for vim inside tmux
-if !has('nvim') && $TERM ==# 'screen-256color'
+if has('termguicolors')
   let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
   let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+  hi! Normal ctermbg=NONE guibg=NONE 
+  hi! Normal ctermbg=NONE guibg=NONE 
 endif
 
 " Language
@@ -75,6 +77,10 @@ Plug 'rbgrouleff/bclose.vim'
 " Plug 'airblade/vim-gitgutter'
 Plug 'easymotion/vim-easymotion'
 
+Plug 'google/vim-maktaba'
+Plug 'google/vim-codefmt'
+Plug 'google/vim-glaive'
+
 call plug#end()
 
 syntax enable
@@ -82,6 +88,10 @@ set background=dark
 colorscheme gruvbox
 " molokai janah seoul256 desert256v2 blackdust colorsbox-material
 
+" Transparent
+if has('termguicolors')
+  hi! Normal ctermbg=NONE guibg=NONE 
+endif
 
 
 " Key Bindings
@@ -225,6 +235,9 @@ let g:coc_snippet_next = '<tab>'
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 let g:NERDTreeShowLineNumbers = 1
 
+" NERDCommenter
+let g:NERDSpaceDelims = 1
+
 " Ranger
 let g:ranger_map_keys = 0
 
@@ -235,3 +248,23 @@ let g:EasyMotion_smartcase = 1
 let g:Lf_ShortcutF = ''
 let g:Lf_ShortcutB = ''
 let g:Lf_CommandMap = {'<C-K>': ['<Up>'], '<C-J>': ['<Down>']}
+
+" Vim-Codefmt
+call glaive#Install()
+Glaive codefmt plugin[mappings]
+
+augroup autoformat_settings
+  autocmd FileType bzl AutoFormatBuffer buildifier
+  autocmd FileType c,cpp,proto,javascript AutoFormatBuffer clang-format
+  autocmd FileType dart AutoFormatBuffer dartfmt
+  autocmd FileType go AutoFormatBuffer gofmt
+  autocmd FileType gn AutoFormatBuffer gn
+  autocmd FileType html,css,sass,scss,less,json AutoFormatBuffer js-beautify
+  autocmd FileType java AutoFormatBuffer google-java-format
+  autocmd FileType python AutoFormatBuffer yapf
+  " Alternative: autocmd FileType python AutoFormatBuffer autopep8
+  autocmd FileType vue AutoFormatBuffer prettier
+augroup END
+
+" Additional
+let g:asmsyntax = 'nasm'

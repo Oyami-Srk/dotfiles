@@ -139,8 +139,6 @@ bindkey '\ec' autosuggest-clear
 
 # alias
 alias ll='ls -l'
-alias ls=' ls'
-alias cd=' cd'
 
 # Turn off case-sensitive
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
@@ -153,13 +151,6 @@ fi
 
 export PATH="/usr/local/opt/gettext/bin:$PATH"
 export PATH="/usr/local/opt/ncurses/bin:$PATH"
-
-PATH="/Users/shiroko/perl5/bin${PATH:+:${PATH}}"; export PATH;
-PERL5LIB="/Users/shiroko/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
-PERL_LOCAL_LIB_ROOT="/Users/shiroko/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
-PERL_MB_OPT="--install_base \"/Users/shiroko/perl5\""; export PERL_MB_OPT;
-PERL_MM_OPT="INSTALL_BASE=/Users/shiroko/perl5"; export PERL_MM_OPT;
-export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles
 
 KEYTIMEOUT=1
 export TERM=xterm-256color
