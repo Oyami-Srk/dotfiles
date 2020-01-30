@@ -127,6 +127,8 @@ zinit ice wait lucid from'gh-r' as'program'
 zinit light sei40kr/fast-alias-tips-bin
 zinit ice wait lucid
 zinit light sei40kr/zsh-fast-alias-tips
+if [[ $OSTYPE =~ "darwin" ]]; then
+fi
 
 # Theme
 setopt promptsubst
