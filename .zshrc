@@ -96,7 +96,6 @@ if [[ ! -s ${ZDOTDIR:-${HOME}}/.zgen/init.zsh ]]; then
     zgen load zsh-users/zsh-completions src
     zgen load Vifon/deer
     zgen load Tarrasch/zsh-bd
-    zgen load djui/alias-tips
     zgen load rupa/z z.sh
 
     # Save init script
@@ -111,6 +110,10 @@ fi
 zgen () {
 	source $ZGEN_SOURCE
 	zgen "$@"
+}
+
+zgen-pure () {
+    rm -f ${ZDOTDIR:-${HOME}}/.zgen/init.zsh
 }
 
 # Theme
@@ -165,4 +168,3 @@ export PATH="/usr/local/opt/ncurses/bin:$PATH"
 
 KEYTIMEOUT=1
 export TERM=xterm-256color
-
