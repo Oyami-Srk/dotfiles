@@ -37,10 +37,10 @@ ZSH_HIGHLIGHT_STYLES[assign]=none
 ZSH_AUTOSUGGEST_USE_ASYNC=true
 ZSH_ALIAS_FINDER_AUTOMATIC=true
 
-export _ZL_DATA="$HOME/.config/.z"
+export _Z_DATA="$HOME/.config/.z"
 
-if [[ ! -f "$_ZL_DATA" ]]; then
-    touch "$_ZL_DATA"
+if [[ ! -f "$_Z_DATA" ]]; then
+    touch "$_Z_DATA"
 fi
 
 # Load zgen
@@ -94,8 +94,7 @@ if [[ ! -s ${ZDOTDIR:-${HOME}}/.zgen/init.zsh ]]; then
     zgen load zsh-users/zsh-completions src
     zgen load Vifon/deer
     zgen load Tarrasch/zsh-bd
-    # zgen load rupa/z z.sh
-    zgen load skywind3000/z.lua
+    zgen load rupa/z z.sh
     zgen load arzzen/calc.plugin.zsh
     zgen load hlissner/zsh-autopair
 
