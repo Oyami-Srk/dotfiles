@@ -1,0 +1,170 @@
+# Z-S-H Configruation file by Shrioko<hhx.xxm#gmail.com>
+export LC_CTYPE=en_US.UTF-8
+
+if [[ -o login ]]; then
+	[ -f "$HOME/.config/login.sh" ] && sh "$HOME/.config/login.sh"
+fi
+
+_Z_DATA="$HOME/.config/.z"
+
+if [[ ! -f "$_Z_DATA" ]]; then
+    touch "$_Z_DATA"
+fi
+
+ZSH_AUTOSUGGEST_USE_ASYNC=true
+
+ZINIT_DIR="${ZDOTDIR:-${HOME}}/.zinit"
+ZINIT_SOURCE="${ZINIT_DIR}/bin/zinit.zsh"
+
+# Load zgen
+if [[ ! -f "$ZINIT_SOURCE" ]]; then
+    echo "Zinit is missing... Install it!!!"
+
+    [[ ! -d "$ZINIT_DIR" ]] && mkdir -p "$ZINIT_DIR" 2> /dev/null
+
+    local repo_url="https://github.com/zdharma/zinit.git"
+
+    if [[ ! -x "`which git`" ]]; then
+        echo "WTF? Even git is missing..."
+        exit 1
+    fi
+
+    git clone $repo_url "${ZINIT_DIR}/bin"
+
+    if [[ $? != 0 ]]; then
+        echo "Installation has failed, remove $ZGEN_PATH and try again..."
+        exit
+    else
+        echo "Install completed~"
+        echo "You can use envhelp restore to install packages backuped before."
+        zcompile $ZINIT_SOURCE
+    fi
+fi
+
+# # if init script doesnt exist.
+# if [[ ! -s ${ZDOTDIR:-${HOME}}/.zgen/init.zsh ]]; then
+
+    # source $ZGEN_SOURCE
+    # # Load base framework
+    # zgen oh-my-zsh
+    # # Load plugins
+    # zgen oh-my-zsh plugins/git
+    # zgen oh-my-zsh plugins/pip
+    # zgen oh-my-zsh plugins/github
+    # zgen oh-my-zsh plugins/python
+    # zgen oh-my-zsh plugins/colorize
+    # zgen oh-my-zsh plugins/sudo
+    # zgen oh-my-zsh plugins/alias-finder
+    # if [[ $OSTYPE =~ "darwin" ]]; then
+        # zgen oh-my-zsh plugins/osx
+        # zgen load laggardkernel/zsh-iterm2
+    # fi
+
+    # # Load packages
+    # # zgen load zsh-users/zsh-syntax-highlighting
+    # zgen load zdharma/fast-syntax-highlighting
+    # zgen load zsh-users/zsh-autosuggestions
+    # zgen load zsh-users/zsh-completions src
+    # zgen load Vifon/deer
+    # zgen load Tarrasch/zsh-bd
+    # zgen load rupa/z z.sh
+    # zgen load arzzen/calc.plugin.zsh
+    # zgen load hlissner/zsh-autopair
+
+    # # Save init script
+    # zgen save
+    # zcompile ${ZDOTDIR:-${HOME}}/.zgen/init.zsh
+# else
+  # source ${ZDOTDIR:-${HOME}}/.zgen/init.zsh
+  # # source $ZGEN_SOURCE
+# fi
+
+source $ZINIT_SOURCE
+
+# zinit load plugins
+zinit light zdharma/fast-syntax-highlighting
+zinit light zsh-users/zsh-autosuggestions
+zinit light zsh-users/zsh-completions
+zinit ice lucid wait='0'
+zinit light Tarrasch/zsh-bd
+zinit ice lucid wait='0'
+zinit light skywind3000/z.lua
+zinit ice lucid wait='0'
+zinit light arzzen/calc.plugin.zsh
+zinit ice lucid wait='0'
+zinit light hlissner/zsh-autopair
+
+zinit ice wait lucid
+zinit snippet OMZ::lib/completion.zsh
+zinit snippet OMZ::lib/git.zsh
+zinit ice wait lucid
+zinit snippet OMZ::lib/history.zsh
+zinit snippet OMZ::lib/key-bindings.zsh
+zinit ice wait lucid
+zinit snippet OMZ::lib/compfix.zsh
+zinit ice wait lucid
+zinit snippet OMZ::lib/directories.zsh
+zinit ice wait lucid
+zinit snippet OMZ::lib/grep.zsh
+zinit snippet OMZ::lib/functions.zsh
+zinit snippet OMZ::lib/misc.zsh
+zinit ice wait lucid
+zinit snippet OMZ::plugins/colored-man-pages/colored-man-pages.plugin.zsh
+zinit ice wait lucid
+zinit snippet OMZ::plugins/sudo/sudo.plugin.zsh
+zinit ice wait lucid atload"unalias grv"
+zinit snippet OMZ::plugins/git/git.plugin.zsh
+zinit ice wait lucid
+zinit snippet OMZ::plugins/pip/pip.plugin.zsh
+zinit ice wait lucid
+zinit snippet OMZ::plugins/github/github.plugin.zsh
+zinit ice wait lucid
+zinit snippet OMZ::plugins/python/python.plugin.zsh
+zinit ice wait lucid
+zinit snippet OMZ::plugins/colorize/colorize.plugin.zsh
+
+zinit ice wait lucid from'gh-r' as'program'
+zinit light sei40kr/fast-alias-tips-bin
+zinit ice wait lucid
+zinit light sei40kr/zsh-fast-alias-tips
+
+# Theme
+setopt promptsubst
+setopt prompt_subst
+local ret_status="%F{blue}[%s%?]"
+PS1='%F{green}%2c%F{blue} >  %f'
+RPROMPT='$(git_prompt_info) %F{green}%D{%H:%M:%S} $ret_status'
+
+ZSH_THEME_GIT_PROMPT_PREFIX="%F{yellow}"
+ZSH_THEME_GIT_PROMPT_SUFFIX="%f"
+ZSH_THEME_GIT_PROMPT_DIRTY=" %F{red}*%f"
+ZSH_THEME_GIT_PROMPT_CLEAN=""
+
+# zsh config
+setopt APPEND_HISTORY
+setopt hist_ignore_space
+
+# default keymap
+bindkey '\eh' backward-char
+bindkey '\el' forward-char
+bindkey '\ej' down-line-or-history
+bindkey '\ek' up-line-or-history
+
+bindkey '\eH' backward-word
+bindkey '\eL' forward-word
+bindkey '\eJ' beginning-of-line
+bindkey '\eK' end-of-line
+
+bindkey -s '\eo' 'cd ..\n'
+bindkey -s '\e;' 'll\n'
+
+# Turn off case-sensitive
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+bindkey "^[OA" history-beginning-search-backward
+bindkey "^[OB" history-beginning-search-forward
+
+export PATH="/usr/local/opt/gettext/bin:$PATH"
+export PATH="/usr/local/opt/ncurses/bin:$PATH"
+
+KEYTIMEOUT=1
+export TERM=xterm-256color
