@@ -39,6 +39,7 @@ ZSH_HIGHLIGHT_STYLES[back-double-quoted-argument]=fg=009
 ZSH_HIGHLIGHT_STYLES[assign]=none
 
 ZSH_AUTOSUGGEST_USE_ASYNC=true
+ZSH_ALIAS_FINDER_AUTOMATIC=true
 
 _Z_DATA="$HOME/.config/.z"
 
@@ -86,17 +87,22 @@ if [[ ! -s ${ZDOTDIR:-${HOME}}/.zgen/init.zsh ]]; then
     zgen oh-my-zsh plugins/python
     zgen oh-my-zsh plugins/colorize
     zgen oh-my-zsh plugins/sudo
+    zgen oh-my-zsh plugins/alias-finder
     if [[ $OSTYPE =~ "darwin" ]]; then
         zgen oh-my-zsh plugins/osx
+        zgen load laggardkernel/zsh-iterm2
     fi
 
     # Load packages
-    zgen load zsh-users/zsh-syntax-highlighting
+    # zgen load zsh-users/zsh-syntax-highlighting
+    zgen load zdharma/fast-syntax-highlighting
     zgen load zsh-users/zsh-autosuggestions
     zgen load zsh-users/zsh-completions src
     zgen load Vifon/deer
     zgen load Tarrasch/zsh-bd
     zgen load rupa/z z.sh
+    zgen load arzzen/calc.plugin.zsh
+    zgen load hlissner/zsh-autopair
 
     # Save init script
     zgen save
@@ -158,10 +164,6 @@ alias ll='ls -l'
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 bindkey "^[OA" history-beginning-search-backward
 bindkey "^[OB" history-beginning-search-forward
-
-if [[ $TERM_PROGRAM =~ "iTerm" ]]; then
-    test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-fi
 
 export PATH="/usr/local/opt/gettext/bin:$PATH"
 export PATH="/usr/local/opt/ncurses/bin:$PATH"
