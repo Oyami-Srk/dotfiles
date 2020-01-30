@@ -1,5 +1,4 @@
 # Z-S-H Configruation file by Shrioko<hhx.xxm#gmail.com>
-
 export LC_CTYPE=en_US.UTF-8
 
 if [[ -o login ]]; then
@@ -43,6 +42,13 @@ ZSH_AUTOSUGGEST_USE_ASYNC=true
 
 _Z_DATA="$HOME/.config/.z"
 
+
+
+if [[ ! -f "$_Z_DATA" ]]; then
+    touch "$_Z_DATA"
+fi
+
+# Load zgen
 if [[ ! -f "$ZGEN_SOURCE" ]]; then
     echo "Zgen is missing... Install it!!!"
 
@@ -52,10 +58,11 @@ if [[ ! -f "$ZGEN_SOURCE" ]]; then
 
     if [[ ! -x "`which git`" ]]; then
         echo "WTF? Even git is missing..."
-        exit
+        exit 1
     fi
 
     git clone https://github.com/tarjoilija/zgen.git "${ZGEN_PATH}/zgen"
+    zcompile $ZGEN_SOURCE
 
     if [[ $? != 0 ]]; then
         echo "Installation has failed, remove $ZGEN_PATH and try again..."
@@ -66,15 +73,10 @@ if [[ ! -f "$ZGEN_SOURCE" ]]; then
     fi
 fi
 
-if [[ ! -f "$_Z_DATA" ]]; then
-    touch "$_Z_DATA"
-fi
-
-# Load zgen
-source $ZGEN_SOURCE
-
 # if init script doesnt exist.
-if ! zgen saved; then
+if [[ ! -s ${ZDOTDIR:-${HOME}}/.zgen/init.zsh ]]; then
+
+    source $ZGEN_SOURCE
     # Load base framework
     zgen oh-my-zsh
     # Load plugins
@@ -99,9 +101,17 @@ if ! zgen saved; then
 
     # Save init script
     zgen save
+    zcompile ${ZDOTDIR:-${HOME}}/.zgen/init.zsh
+else
+  # source ${ZDOTDIR:-${HOME}}/.zgen/init.zsh
+  source $ZGEN_SOURCE
 fi
 
-
+# Load zgen only if a user types a zgen command
+zgen () {
+	source $ZGEN_SOURCE
+	zgen "$@"
+}
 
 # Theme
 local ret_status="%F{blue}[%s%?]"
@@ -155,3 +165,4 @@ export PATH="/usr/local/opt/ncurses/bin:$PATH"
 
 KEYTIMEOUT=1
 export TERM=xterm-256color
+
