@@ -9,13 +9,9 @@ ZGEN_PATH="$HOME/.config/zsh"
 ZGEN_SOURCE="${ZGEN_PATH}/zgen/zgen.zsh"
 
 # syntax color definition
-ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
-
 typeset -A ZSH_HIGHLIGHT_STYLES
 
-# ZSH_HIGHLIGHT_STYLES[command]=fg=white,bold
-# ZSH_HIGHLIGHT_STYLES[alias]='fg=magenta,bold'
-
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
 ZSH_HIGHLIGHT_STYLES[default]=none
 ZSH_HIGHLIGHT_STYLES[unknown-token]=fg=009
 ZSH_HIGHLIGHT_STYLES[reserved-word]=fg=009,standout
@@ -41,12 +37,10 @@ ZSH_HIGHLIGHT_STYLES[assign]=none
 ZSH_AUTOSUGGEST_USE_ASYNC=true
 ZSH_ALIAS_FINDER_AUTOMATIC=true
 
-_Z_DATA="$HOME/.config/.z"
+export _ZL_DATA="$HOME/.config/.z"
 
-
-
-if [[ ! -f "$_Z_DATA" ]]; then
-    touch "$_Z_DATA"
+if [[ ! -f "$_ZL_DATA" ]]; then
+    touch "$_ZL_DATA"
 fi
 
 # Load zgen
@@ -100,7 +94,8 @@ if [[ ! -s ${ZDOTDIR:-${HOME}}/.zgen/init.zsh ]]; then
     zgen load zsh-users/zsh-completions src
     zgen load Vifon/deer
     zgen load Tarrasch/zsh-bd
-    zgen load rupa/z z.sh
+    # zgen load rupa/z z.sh
+    zgen load skywind3000/z.lua
     zgen load arzzen/calc.plugin.zsh
     zgen load hlissner/zsh-autopair
 
@@ -108,8 +103,8 @@ if [[ ! -s ${ZDOTDIR:-${HOME}}/.zgen/init.zsh ]]; then
     zgen save
     zcompile ${ZDOTDIR:-${HOME}}/.zgen/init.zsh
 else
-  # source ${ZDOTDIR:-${HOME}}/.zgen/init.zsh
-  source $ZGEN_SOURCE
+  source ${ZDOTDIR:-${HOME}}/.zgen/init.zsh
+  # source $ZGEN_SOURCE
 fi
 
 # Load zgen only if a user types a zgen command
@@ -124,7 +119,7 @@ zgen-pure () {
 
 # Theme
 local ret_status="%F{blue}[%s%?]"
-PROMPT='%F{green}%2c%F{blue} λ  %f'
+PROMPT='%F{green}%2c%F{blue} >  %f'
 RPROMPT='$(git_prompt_info) %F{green}%D{%H:%M:%S} $ret_status'
 
 ZSH_THEME_GIT_PROMPT_PREFIX="%F{yellow}"

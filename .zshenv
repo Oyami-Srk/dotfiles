@@ -12,6 +12,7 @@ if [ $PLATFORM = "Darwin" ]; then
     # homebrew
     export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles
     export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+    export https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 all_proxy=socks5://127.0.0.1:7891
 fi
 
 alias emacs='emacsclient -a "" -c'
