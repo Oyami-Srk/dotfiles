@@ -12,6 +12,7 @@ if [[ ! -f "$_Z_DATA" ]]; then
 fi
 
 ZSH_AUTOSUGGEST_USE_ASYNC=true
+ZSH_ALIAS_FINDER_AUTOMATIC=true
 
 ZINIT_DIR="${ZDOTDIR:-${HOME}}/.zinit"
 ZINIT_SOURCE="${ZINIT_DIR}/bin/zinit.zsh"
@@ -89,11 +90,13 @@ zinit ice wait lucid
 zinit snippet OMZ::plugins/python/python.plugin.zsh
 zinit ice wait lucid
 zinit snippet OMZ::plugins/colorize/colorize.plugin.zsh
-
-zinit ice wait lucid from'gh-r' as'program'
-zinit light sei40kr/fast-alias-tips-bin
 zinit ice wait lucid
-zinit light sei40kr/zsh-fast-alias-tips
+zinit snippet OMZ::plugins/alias-finder/alias-finder.plugin.zsh
+
+# zinit ice wait lucid from'gh-r' as'program'
+# zinit light sei40kr/fast-alias-tips-bin
+# zinit ice wait lucid
+# zinit light sei40kr/zsh-fast-alias-tips
 if [[ $OSTYPE =~ "darwin" ]]; then
 fi
 
