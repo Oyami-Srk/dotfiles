@@ -41,49 +41,14 @@ if [[ ! -f "$ZINIT_SOURCE" ]]; then
     fi
 fi
 
-# # if init script doesnt exist.
-# if [[ ! -s ${ZDOTDIR:-${HOME}}/.zgen/init.zsh ]]; then
-
-    # source $ZGEN_SOURCE
-    # # Load base framework
-    # zgen oh-my-zsh
-    # # Load plugins
-    # zgen oh-my-zsh plugins/git
-    # zgen oh-my-zsh plugins/pip
-    # zgen oh-my-zsh plugins/github
-    # zgen oh-my-zsh plugins/python
-    # zgen oh-my-zsh plugins/colorize
-    # zgen oh-my-zsh plugins/sudo
-    # zgen oh-my-zsh plugins/alias-finder
-    # if [[ $OSTYPE =~ "darwin" ]]; then
-        # zgen oh-my-zsh plugins/osx
-        # zgen load laggardkernel/zsh-iterm2
-    # fi
-
-    # # Load packages
-    # # zgen load zsh-users/zsh-syntax-highlighting
-    # zgen load zdharma/fast-syntax-highlighting
-    # zgen load zsh-users/zsh-autosuggestions
-    # zgen load zsh-users/zsh-completions src
-    # zgen load Vifon/deer
-    # zgen load Tarrasch/zsh-bd
-    # zgen load rupa/z z.sh
-    # zgen load arzzen/calc.plugin.zsh
-    # zgen load hlissner/zsh-autopair
-
-    # # Save init script
-    # zgen save
-    # zcompile ${ZDOTDIR:-${HOME}}/.zgen/init.zsh
-# else
-  # source ${ZDOTDIR:-${HOME}}/.zgen/init.zsh
-  # # source $ZGEN_SOURCE
-# fi
-
 source $ZINIT_SOURCE
 
 # zinit load plugins
+zinit ice lucid wait='0' atinit='zpcompinit'
 zinit light zdharma/fast-syntax-highlighting
+zinit ice lucid wait="0" atload='_zsh_autosuggest_start'
 zinit light zsh-users/zsh-autosuggestions
+zinit ice lucid wait='0'
 zinit light zsh-users/zsh-completions
 zinit ice lucid wait='0'
 zinit light Tarrasch/zsh-bd
@@ -93,6 +58,8 @@ zinit ice lucid wait='0'
 zinit light arzzen/calc.plugin.zsh
 zinit ice lucid wait='0'
 zinit light hlissner/zsh-autopair
+zinit ice lucid wait='0' as"null" atinit'fpath+=( $PWD );' atload"autoload -U deer;zle -N deer;bindkey '\ek' deer;"
+zinit light Vifon/deer
 
 zinit ice wait lucid
 zinit snippet OMZ::lib/completion.zsh
@@ -165,8 +132,10 @@ zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 bindkey "^[OA" history-beginning-search-backward
 bindkey "^[OB" history-beginning-search-forward
 
-export PATH="/usr/local/opt/gettext/bin:$PATH"
-export PATH="/usr/local/opt/ncurses/bin:$PATH"
 
 KEYTIMEOUT=1
 export TERM=xterm-256color
+
+unset LSCOLORS
+export CLICOLOR=1
+export CLICOLOR_FORCE=1
