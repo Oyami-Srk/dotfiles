@@ -1,0 +1,7 @@
+#!/bin/sh
+mac_addr="8C:DC:D4:21:43:97"
+if which wakeonlan >/dev/null 2>&1; then
+    wakeonlan  $mac_addr
+else
+    echo wakeonlan not installed
+fi
