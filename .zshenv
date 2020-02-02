@@ -34,6 +34,10 @@ alias vi='nvim'
 alias pe='python-escpos'
 alias petxt='pe text --txt'
 alias ls='exa'
+alias t='tmux'
+alias ta='t attach -t'
+alias td='t attach -d -t'
+alias tl='t list-sessions'
 
 #export VIM=/usr/local/share/nvim
 #export VIMRUNTIME=/usr/local/share/nvim/runtime
