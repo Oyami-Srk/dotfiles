@@ -142,3 +142,5 @@ export TERM=xterm-256color
 unset LSCOLORS
 export CLICOLOR=1
 export CLICOLOR_FORCE=1
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"

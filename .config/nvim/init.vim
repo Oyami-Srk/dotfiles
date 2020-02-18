@@ -1,5 +1,3 @@
-" NeoVim Configuration By Shiroko <hhx.xxm@gmail.com>
-
 " Files
 set nobackup
 set nowritebackup
@@ -80,6 +78,7 @@ Plug 'easymotion/vim-easymotion'
 Plug 'google/vim-maktaba'
 Plug 'google/vim-codefmt'
 Plug 'google/vim-glaive'
+Plug 'shirk/vim-gas'
 
 call plug#end()
 
