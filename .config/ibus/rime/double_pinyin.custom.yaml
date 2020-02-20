@@ -1,0 +1,127 @@
+patch:
+  "schema/name": 自然码双拼
+  "schema/dependencies":
+    __include: double_pinyin.schema:/schema/dependencies
+    __append:
+      - emoji
+      - easy_en
+      - zrm2000
+  switches:
+    - name: ascii_mode
+      reset: 0
+      states: [ 中, 英 ]
+    - name: full_shape
+      states: [ 半, 全 ]
+    - name: simplification
+      reset: 1
+      states: [ 漢, 汉 ]
+    - name: ascii_punct
+      states: [ 。，, ．， ]
+    - name: _hide_comment
+      reset: 1
+
+  __include: emoji_suggestion_patch
+  "punctuator/import_preset": symbols
+  "recognizer/patterns/punct": "^/([A-Z|a-z]*|[0-9]|10)$"
+  "engine/translators":
+    __include: double_pinyin.schema:/engine/translators
+    __append:
+      - table_translator@custom_phrase
+      - table_translator@easy_en
+      - table_translator@zrm2000
+      - "table_translator@nihongo-r"
+  "engine/filters":
+    # __include: double_pinyin.schema:/engine/filters:
+    # __append:
+    - simplifier
+    - simplifier@emoji_suggestion
+    - uniquifier
+    # - charset_filter@gbk
+
+  translator:
+    dictionary: luna_pinyin.custom
+    prism: double_pinyin
+  easy_en:
+    dictionary: easy_en
+    initial_quality: -3
+  zrm2000:
+    dictionary: zrm2000
+    enable_sentence: false
+    enable_completion: false
+    initial_quality: 1
+  "nihongo-r":
+    dictionary: nihongo-r
+    enable_completion: true
+    enable_sentence: false
+    initial_quality: -3
+
+  custom_phrase:
+    dictionary: ""
+    user_dict: custom_phrase
+    db_class: stabledb
+    enable_completion: false
+    enable_sentence: false
+    initial_quality: 3
+    
+  user_dict:
+    dictionary: user_phrase
+    enable_sentence: false
+    enable_completion: false
+    initial_quality: 1
+
+  reverse_lookup:
+    dictionary: emoji
+    enable_completion: true
+    prefix: "`"
+    suffix: "'"
+    tips: 〔Emoji〕
+
+  speller:
+    #alphabet: zyxwvutsrqponmlkjihgfedcba
+    alphabet: ',.abcdefghijklmnopqrstuvwxyz'
+    initials: 'abcdefghijklmnopqrstuvwxyz'
+    delimiter: " '"
+    algebra:
+      - erase/^xx$/
+      - derive/^([jqxy])u$/$1v/
+      - derive/^([aoe])([ioun])$/$1$1$2/
+      - xform/^([aoe])(ng)?$/$1$1$2/
+      - xform/iu$/Q/
+      - xform/[iu]a$/W/
+      - xform/[uv]an$/R/
+      - xform/[uv]e$/T/
+      - xform/ing$|uai$/Y/
+      - xform/^sh/U/
+      - xform/^ch/I/
+      - xform/^zh/V/
+      - xform/uo$/O/
+      - xform/[uv]n$/P/
+      - xform/i?ong$/S/
+      - xform/[iu]ang$/D/
+      - xform/(.)en$/$1F/
+      - xform/(.)eng$/$1G/
+      - xform/(.)ang$/$1H/
+      - xform/ian$/M/
+      - xform/(.)an$/$1J/
+      - xform/iao$/C/
+      - xform/(.)ao$/$1K/
+      - xform/(.)ai$/$1L/
+      - xform/(.)ei$/$1Z/
+      - xform/ie$/X/
+      - xform/ui$/V/
+      - xform/(.)ou$/$1B/
+      - xform/in$/N/
+      - xlit/QWRTYUIOPSDFGHMJCKLZXVBN/qwrtyuiopsdfghmjcklzxvbn/
+      #- abbrev/^(.).+$/$1/
+
+emoji_suggestion_patch:
+  switches/@next:
+    name: emoji_suggestion
+    reset: 0
+    states: [ "🈚️️\uFE0E", "🈶️️\uFE0F" ]
+  'engine/filters/@before 0':
+    simplifier@emoji_suggestion
+  emoji_suggestion:
+    opencc_config: emoji.json
+    option_name: emoji_suggestion
+    tips: all
