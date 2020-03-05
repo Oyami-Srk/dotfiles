@@ -5,6 +5,7 @@ export GOROOT=/usr/local/opt/go/libexec
 export GOPATH=$HOME/Projects/golang
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 export PATH=$PATH:$HOME/.config/ubin
+export PATH="$PATH:/Users/shiroko/Library/Python/3.7/bin"
 
 export SSH_KEY_PATH="~/.ssh/id_rsa"
 
