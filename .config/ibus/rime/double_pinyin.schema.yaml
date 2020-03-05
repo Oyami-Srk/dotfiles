@@ -10,18 +10,28 @@ schema:
   description: |
     朙月拼音＋自然碼雙拼方案。
   dependencies:
-    - stroke
+    - emoji
+    - easy_en
+    - zrm2000
+    - "nihongo-r"
+    - luna_pinyin
 
 switches:
   - name: ascii_mode
     reset: 0
-    states: [ 中文, 西文 ]
+    states: [ 中, 英 ]
   - name: full_shape
-    states: [ 半角, 全角 ]
+    states: [ 半, 全 ]
   - name: simplification
-    states: [ 漢字, 汉字 ]
+    reset: 1
+    states: [ 漢, 汉 ]
   - name: ascii_punct
     states: [ 。，, ．， ]
+  - name: _hide_comment
+    reset: 1
+  - name: emoji_suggestion
+    reset: 0
+    states: [ "🈚️️\uFE0E", "🈶️️\uFE0F" ]
 
 engine:
   processors:
@@ -43,12 +53,18 @@ engine:
     - punct_translator
     - reverse_lookup_translator
     - script_translator
+    - table_translator@custom_phrase
+    - table_translator@easy_en
+    - table_translator@zrm2000
+    - "table_translator@nihongo-r"
   filters:
+    - simplifier@emoji_suggestion
     - simplifier
     - uniquifier
 
 speller:
-  alphabet: zyxwvutsrqponmlkjihgfedcba
+  alphabet: ',.abcdefghijklmnopqrstuvwxyz'
+  initials: 'abcdefghijklmnopqrstuvwxyz'
   delimiter: " '"
   algebra:
     - erase/^xx$/
@@ -84,55 +100,48 @@ speller:
     #- abbrev/^(.).+$/$1/
 
 translator:
-  dictionary: luna_pinyin
+  dictionary: luna_pinyin.custom
   prism: double_pinyin
-  preedit_format:
-    - xform/([bpmnljqxy])n/$1in/
-    - xform/(\w)g/$1eng/
-    - xform/(\w)q/$1iu/
-    - xform/([gkhvuirzcs])w/$1ua/
-    - xform/(\w)w/$1ia/
-    - xform/([dtnlgkhjqxyvuirzcs])r/$1uan/
-    - xform/(\w)t/$1ve/
-    - xform/([gkhvuirzcs])y/$1uai/
-    - xform/(\w)y/$1ing/
-    - xform/([dtnlgkhvuirzcs])o/$1uo/
-    - xform/(\w)p/$1un/
-    - xform/([jqx])s/$1iong/
-    - xform/(\w)s/$1ong/
-    - xform/([jqxnl])d/$1iang/
-    - xform/(\w)d/$1uang/
-    - xform/(\w)f/$1en/
-    - xform/(\w)h/$1ang/
-    - xform/(\w)j/$1an/
-    - xform/(\w)k/$1ao/
-    - xform/(\w)l/$1ai/
-    - xform/(\w)z/$1ei/
-    - xform/(\w)x/$1ie/
-    - xform/(\w)c/$1iao/
-    - xform/([dtgkhvuirzcs])v/$1ui/
-    - xform/(\w)b/$1ou/
-    - xform/(\w)m/$1ian/
-    - xform/([aoe])\1(\w)/$1$2/
-    - "xform/(^|[ '])v/$1zh/"
-    - "xform/(^|[ '])i/$1ch/"
-    - "xform/(^|[ '])u/$1sh/"
-    - xform/([jqxy])v/$1u/
-    - xform/([nl])v/$1ü/
+
+easy_en:
+  dictionary: easy_en
+  initial_quality: -90
+
+zrm2000:
+  dictionary: zrm2000
+  enable_sentence: false
+  enable_completion: false
+  initial_quality: 10
+
+"nihongo-r":
+  dictionary: nihongo-r
+  enable_completion: true
+  enable_sentence: false
+  initial_quality: -30
+
+custom_phrase:
+  dictionary: ""
+  user_dict: custom_phrase
+  db_class: stabledb
+  enable_completion: false
+  enable_sentence: false
+  initial_quality: 30
+  
+user_dict:
+  dictionary: user_phrase
+  enable_sentence: false
+  enable_completion: false
+  initial_quality: 1
 
 reverse_lookup:
-  dictionary: stroke
+  dictionary: emoji
   enable_completion: true
   prefix: "`"
   suffix: "'"
-  tips: 〔筆畫〕
-  preedit_format:
-    - xlit/hspnz/一丨丿丶乙/
-  comment_format:
-    - xform/([nl])v/$1ü/
+  tips: 〔Emoji〕
 
 punctuator:
-  import_preset: default
+  import_preset: symbols
 
 key_binder:
   import_preset: default
@@ -141,3 +150,9 @@ recognizer:
   import_preset: default
   patterns:
     reverse_lookup: "`[a-z]*'?$"
+    punct: "^/([A-Z|a-z]*|[0-9]|10)$"
+
+emoji_suggestion:
+  opencc_config: emoji.json
+  option_name: emoji_suggestion
+  tips: all

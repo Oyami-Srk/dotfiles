@@ -45,9 +45,7 @@ engine:
   translators:
     - echo_translator
     - punct_translator
-    - table_translator@english 
     - table_translator@custom_phrase
-    - table_translator@zrm2000.idioms
     - table_translator 
     - reverse_lookup_translator
   filters:
@@ -63,11 +61,6 @@ speller:
   
 translator:
   dictionary: zrm2000
-
-english:
-  dictionary: english
-  enable_completion: true
-  enable_sentence: true
 
 custom_phrase:
   dictionary: ""

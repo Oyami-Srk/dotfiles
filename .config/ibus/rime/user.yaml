@@ -1,10 +1,11 @@
 var:
-  last_build_time: 1581731299
   option:
-    full_shape: false
     simplification: true
   previously_selected_schema: double_pinyin
   schema_access_time:
-    double_pinyin: 1558166095
-    luna_pinyin: 1545470752
-    "nihongo-r": 1558165733
+    double_pinyin: 1583421162
+    easy_en: 1583417721
+    emoji: 1583419614
+    luna_pinyin: 1583418496
+    "nihongo-r": 1583417729
+    zrm2000: 1583420231
