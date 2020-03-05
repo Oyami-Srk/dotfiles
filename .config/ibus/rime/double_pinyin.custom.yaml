@@ -6,6 +6,8 @@ patch:
       - emoji
       - easy_en
       - zrm2000
+      - "nihongo-r"
+      - luna_pinyin
   switches:
     - name: ascii_mode
       reset: 0
