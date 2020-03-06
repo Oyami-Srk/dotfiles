@@ -26,7 +26,18 @@ fi
 
 # Check whether clash is start and export proxy env
 if sh -c 'LANG=C netstat -an | grep "\(\.\|\:\)7890.*LISTEN"' &> /dev/null; then
-    export https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 all_proxy=socks5://127.0.0.1:7891
+    PROXY_SERVER=127.0.0.1
+    HTTP_PORT=7890
+    SOCKS_PORT=7891
+    export https_proxy=http://$PROXY_SERVER:$HTTP_PORT http_proxy=http://$PROXY_SERVER:$HTTP_PORT all_proxy=socks5://$PROXY_SERVER:$SOCKS_PORT
+    export HTTPS_PROXY=http://$PROXY_SERVER:$HTTP_PORT HTTP_PROXY=http://$PROXY_SERVER:$HTTP_PORT ALL_PROXY=socks5://$PROXY_SERVER:$SOCKS_PORT
+    # if [ $PLATFORM = "Linux" ]; then
+        # if which gsettings &> /dev/null; then
+           # gsettings set org.gnome.system.proxy mode 'manual'
+           # gsettings set org.gnome.system.proxy.http host '$PROXY_SERVER'
+           # gsettings set org.gnome.system.proxy.http port $HTTP_PORT
+        # fi
+    # fi
 fi
 
 alias emacs='emacsclient -a "" -c'
