@@ -29,8 +29,8 @@ if sh -c 'LANG=C netstat -an | grep "\(\.\|\:\)7890.*LISTEN"' &> /dev/null; then
     PROXY_SERVER=127.0.0.1
     HTTP_PORT=7890
     SOCKS_PORT=7891
-    export https_proxy=http://$PROXY_SERVER:$HTTP_PORT http_proxy=http://$PROXY_SERVER:$HTTP_PORT all_proxy=socks5://$PROXY_SERVER:$SOCKS_PORT
-    export HTTPS_PROXY=http://$PROXY_SERVER:$HTTP_PORT HTTP_PROXY=http://$PROXY_SERVER:$HTTP_PORT ALL_PROXY=socks5://$PROXY_SERVER:$SOCKS_PORT
+    export https_proxy=http://$PROXY_SERVER:$HTTP_PORT http_proxy=http://$PROXY_SERVER:$HTTP_PORT all_proxy=socks5://$PROXY_SERVER:$SOCKS_PORT no_proxy=localhost,127.0.0.0/8,*.local
+    export HTTPS_PROXY=http://$PROXY_SERVER:$HTTP_PORT HTTP_PROXY=http://$PROXY_SERVER:$HTTP_PORT ALL_PROXY=socks5://$PROXY_SERVER:$SOCKS_PORT NO_PROXY=localhost,127.0.0.0/8,*.local
     # if [ $PLATFORM = "Linux" ]; then
         # if which gsettings &> /dev/null; then
            # gsettings set org.gnome.system.proxy mode 'manual'
