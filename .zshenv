@@ -15,7 +15,7 @@ if [ $PLATFORM = "Darwin" ]; then
     # homebrew
     export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles
     export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
-    if [ $TERM_PROGRAM = "iTerm.app" ]; then
+    if [ "x$TERM_PROGRAM" = "xiTerm.app" ]; then
         export PATH="$PATH:$HOME/.config/ubin/macos"
     fi
 
@@ -50,6 +50,8 @@ alias py=python3
 alias py2=python2.7
 alias enw=emacs -nw
 alias python=py
+alias v=vi
+alias vi=vim
 alias vim='nvim'
 which nvim &> /dev/null && alias vi='vim'
 which exa &> /dev/null && alias ls='exa'

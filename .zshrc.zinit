@@ -146,4 +146,10 @@ unset LSCOLORS
 export CLICOLOR=1
 export CLICOLOR_FORCE=1
 
+# envir need to be override.
+if [ $PLATFORM = "Darwin" ]; then
+    export PATH="/usr/local/opt/make/libexec/gnubin:$PATH"
+fi
+
+
 [[ ! -z "${ZPROF}" ]] && zprof

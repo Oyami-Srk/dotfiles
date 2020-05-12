@@ -79,7 +79,8 @@ Plug 'google/vim-maktaba'
 Plug 'google/vim-codefmt'
 Plug 'google/vim-glaive'
 Plug 'shirk/vim-gas'
-
+" Plug 'jceb/vim-orgmode'
+" Plug 'aserebryakov/vim-todo-lists'
 call plug#end()
 
 syntax enable
