@@ -81,6 +81,9 @@ Plug 'google/vim-glaive'
 Plug 'shirk/vim-gas'
 " Plug 'jceb/vim-orgmode'
 " Plug 'aserebryakov/vim-todo-lists'
+if exists('g:gonvim_running')
+    Plug 'akiyosi/gonvim-fuzzy'
+endif
 call plug#end()
 
 syntax enable
@@ -268,3 +271,19 @@ augroup END
 
 " Additional
 let g:asmsyntax = 'nasm'
+let g:guifont = "MesloLGS NF:13"
+
+" Source for GUI Client
+if exists('g:gonvim_running') || has('gui_vimr')
+  if filereadable(expand("~/.config/nvim/ginit.vim"))
+    source ~/.config/nvim/ginit.vim
+  endif
+endif
+
+if exists('g:gonvim_running') && filereadable(expand("~/.config/nvim/ginit_gonvim.vim"))
+  source ~/.config/nvim/ginit_gonvim.vim
+endif
+
+if has('gui_vimr') && filereadable(expand("~/.config/nvim/ginit_vimr.vim"))
+  source ~/.config/nvim/ginit_vimr.vim 
+endif

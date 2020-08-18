@@ -87,6 +87,7 @@
     "9": [":9wincmd w", "window-9"],
     " ": "clear-highlight",
     ";": ["<Plug>NERDCommenterToggle", "toggle-comment"],
+    "'": [":terminal", "Terminal"],
     "e": ["<Plug>(easymotion-prefix)", "easy-motion"],
     "c": {
         "name": "+comment",
@@ -104,5 +105,3 @@
         "u": ["<Plug>NERDCommenterUncomment", "uncomment"]
     }
 }
-
-

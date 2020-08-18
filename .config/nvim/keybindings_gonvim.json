@@ -1,0 +1,28 @@
+{
+    "a": {
+        "name": "+GoNeovim",
+        "w": {
+            "name": "+WorkSpace",
+            "c": [":GonvimWorkspaceNew", "New"],
+            "n": [":GonvimWorkspaceNext", "Next"],
+            "p": [":GonvimWorkspacePrevious", "Previous"],
+            "1": [":GonvimWorkspaceSwitch 1", "Workspace 1"],
+            "2": [":GonvimWorkspaceSwitch 2", "Workspace 2"],
+            "3": [":GonvimWorkspaceSwitch 3", "Workspace 3"],
+            "4": [":GonvimWorkspaceSwitch 4", "Workspace 4"],
+            "5": [":GonvimWorkspaceSwitch 5", "Workspace 5"],
+            "6": [":GonvimWorkspaceSwitch 6", "Workspace 6"]
+        },
+        "m": [":GonvimMarkdown", "Markdown Preview"],
+        "i": [":GonvimMiniMap", "Minimap"],
+        "o": [":GonvimFilerOpen", "Open in exploer"],
+        "f": {
+            "name": "+Fuzzy",
+            "f": [":GonvimFuzzyFiles", "Files"],
+            "l": [":GonvimFuzzyBLines", "Lines"],
+            "b": [":GonvimFuzzyBuffers", "Buffers"],
+            "a": [":GonvimFuzzyAg", "Ag"],
+            "r": [":GonvimFuzzyResume", "Resume"]
+        }
+    }
+}
