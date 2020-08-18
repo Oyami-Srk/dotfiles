@@ -6,6 +6,7 @@ export GOPATH=$HOME/Projects/golang
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 export PATH=$PATH:$HOME/.config/ubin
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+export PATH="$HOME/.cargo/bin:$PATH"
 
 export SSH_KEY_PATH="~/.ssh/id_rsa"
 
@@ -15,6 +16,7 @@ if [ $PLATFORM = "Darwin" ]; then
     # homebrew
     export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles
     export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+    export PATH="$PATH:/Applications/goneovim.app/Contents/MacOS"
     if [ "x$TERM_PROGRAM" = "xiTerm.app" ]; then
         export PATH="$PATH:$HOME/.config/ubin/macos"
     fi
@@ -59,6 +61,8 @@ alias t='tmux'
 alias ta='t attach -t'
 alias td='t attach -d -t'
 alias tl='t list-sessions'
+alias gnvim='goneovim'
+alias gv='gnvim'
 
 #export VIM=/usr/local/share/nvim
 #export VIMRUNTIME=/usr/local/share/nvim/runtime
