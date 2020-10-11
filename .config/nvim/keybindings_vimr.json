@@ -1,0 +1,9 @@
+{
+    "a": {
+        "name": "+VimR",
+        "m": [":VimRMaximizeWindow", "MaximizeWindow"],
+        "f": [":VimRToggleFullscreen", "Fullscreen"],
+        "t": [":VimRToggleTools", "Tool"],
+        "b": [":VimRToggleToolButtons", "ToolButton"]
+    }
+}
