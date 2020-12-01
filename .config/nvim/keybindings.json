@@ -47,7 +47,8 @@
             "i": [":PlugInstall", "plug-install"]
         },
         "a": ["<Plug>(EasyAlign)", "easy-align"],
-        "t": [":NERDTreeToggle", "nerdtree-toggle"]
+        "t": [":NERDTreeToggle", "nerdtree-toggle"],
+        "f": [":call CocAction('format')", "format"]
     },
     "f": {
         "name": "+file",
