@@ -56,7 +56,8 @@ call plug#begin()
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 " Plug 'junegunn/vim-easy-align'
-Plug 'jiangmiao/auto-pairs'
+" Plug 'jiangmiao/auto-pairs'
+" Use coc-pairs instead
 Plug 'liuchengxu/vim-which-key'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " pip3 install --user pynvim
@@ -84,6 +85,9 @@ Plug 'shirk/vim-gas'
 if exists('g:gonvim_running')
     Plug 'akiyosi/gonvim-fuzzy'
 endif
+
+Plug 'lervag/vimtex'
+Plug 'xuhdev/vim-latex-live-preview'
 call plug#end()
 
 syntax enable
@@ -287,3 +291,25 @@ endif
 if has('gui_vimr') && filereadable(expand("~/.config/nvim/ginit_vimr.vim"))
   source ~/.config/nvim/ginit_vimr.vim 
 endif
+
+" VimTeX
+let g:vimtex_compiler_latexmk = { 
+        \ 'executable' : 'latexmk',
+        \ 'options' : [ 
+        \   '-xelatex',
+        \   '-file-line-error',
+        \   '-synctex=1',
+        \   '-interaction=nonstopmode',
+        \ ],
+        \}
+" let g:Tex_CompileRule_pdf = 'xelatex -synctex=1 --interaction=nonstopmode $*'
+let g:tex_flavor='latex'
+let g:vimtex_view_method='skim'
+let g:vimtex_quickfix_mode=0
+set conceallevel=2
+let g:tex_conceal='abdmg'
+
+" vim-latex-live-preview
+let g:livepreview_previewer = 'evince'
+let g:livepreview_engine = 'xelatex'
+autocmd Filetype tex setl updatetime=2
