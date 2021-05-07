@@ -104,7 +104,7 @@ if [[ $OSTYPE =~ "darwin" ]]; then
 fi
 
 # Theme
-if which starship &> /dev/null; then
+if which disable_starship &> /dev/null; then
     eval $(starship init zsh)
 else
     setopt promptsubst
