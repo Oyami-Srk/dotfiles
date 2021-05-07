@@ -1,0 +1,36 @@
+#!/usr/bin/env zsh
+
+read urllist
+while read line; do; urllist="$urllist\n$line"; done
+
+echo $urllist | parallel --jobs 8 wget -q
+ret=$?
+
+if [ $ret -ne 0 ]; then
+    echo "Error when download. with code: " $ret
+    exit
+fi
+echo $urllist | while read line; do; mv `echo $line | sed -r "s/^.*media\/((.*)\?.*$)/\1 \2/g"`; done 
+if [ $? -ne 0 ]; then
+    echo "Error when renaming file. with code: " $?
+    exit
+fi
+ls | grep name= | while read line; do; mv $line `echo $line | sed 's/\?name.*$//g'`;done
+cwd=$(pwd | sed 's/\//\\\//g')
+
+today=`date "+%Y.%m.%d"`
+txt="$today"
+if [ 1 ]; then
+    local index=1
+    while :
+    do
+        if [ ! -f $txt-$index.txt ]; then
+            txtn="$txt-$index"
+            break
+        fi
+        (( index++ ))
+    done
+fi
+txtfl=$txtn.txt
+
+echo $urllist | sed -r "s/^.*media(.*)\?.*$/file:\/\/$cwd\1/g" > $txtfl

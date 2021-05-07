@@ -104,16 +104,20 @@ if [[ $OSTYPE =~ "darwin" ]]; then
 fi
 
 # Theme
-setopt promptsubst
-setopt prompt_subst
-local ret_status="%F{blue}[%s%?]"
-PS1='%F{green}%2c%F{blue} >  %f'
-RPROMPT='$(git_prompt_info) %F{green}%D{%H:%M:%S} $ret_status'
+if which starship &> /dev/null; then
+    eval $(starship init zsh)
+else
+    setopt promptsubst
+    setopt prompt_subst
+    local ret_status="%F{blue}[%s%?]"
+    PS1='%F{green}%2c%F{blue} >  %f'
+    RPROMPT='$(git_prompt_info) %F{green}%D{%H:%M:%S} $ret_status'
 
-ZSH_THEME_GIT_PROMPT_PREFIX="%F{yellow}"
-ZSH_THEME_GIT_PROMPT_SUFFIX="%f"
-ZSH_THEME_GIT_PROMPT_DIRTY=" %F{red}*%f"
-ZSH_THEME_GIT_PROMPT_CLEAN=""
+    ZSH_THEME_GIT_PROMPT_PREFIX="%F{yellow}"
+    ZSH_THEME_GIT_PROMPT_SUFFIX="%f"
+    ZSH_THEME_GIT_PROMPT_DIRTY=" %F{red}*%f"
+    ZSH_THEME_GIT_PROMPT_CLEAN=""
+fi
 
 # zsh config
 setopt APPEND_HISTORY
@@ -153,3 +157,17 @@ fi
 
 
 [[ ! -z "${ZPROF}" ]] && zprof
+
+
+autoload -U +X compinit && compinit
+#compdef pio
+_pio() {
+  eval $(env COMMANDLINE="${words[1,$CURRENT]}" _PIO_COMPLETE=complete-zsh  pio)
+}
+if [[ "$(basename -- ${(%):-%x})" != "_pio" ]]; then
+  compdef _pio pio
+fi
+
+if [[ -f "$HOME/.zsh_alias" ]]; then
+    source $HOME/.zsh_alias
+fi

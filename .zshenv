@@ -11,19 +11,18 @@ export PATH="$HOME/.cargo/bin:$PATH"
 export SSH_KEY_PATH="~/.ssh/id_rsa"
 
 if [ $PLATFORM = "Darwin" ]; then
+    # lib
+    export LIBRARY_PATH="$LIBRARY_PATH:/usr/local/lib"
     # pipx
     export PATH="$PATH:$HOME/Library/Python/3.7/bin"
     # homebrew
-    export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles
+    # export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles
+    export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles/bottles
     export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
     export PATH="$PATH:/Applications/goneovim.app/Contents/MacOS"
     if [ "x$TERM_PROGRAM" = "xiTerm.app" ]; then
         export PATH="$PATH:$HOME/.config/ubin/macos"
     fi
-
-    alias pe='python-escpos'
-    alias petxt='pe text --txt'
-    alias pc='proxychains4 -q'
 fi
 
 # Check whether clash is start and export proxy env
@@ -49,37 +48,13 @@ elif [ -f /.dockerenv ]; then
  
 fi
 
-alias emacs='emacsclient -a "" -c'
-alias e=emacs
-alias s=screen
-alias sl='screen -ls'
-alias sr='screen -r'
-alias pg=progress
-alias py=python3
-alias py2=python2.7
-alias enw=emacs -nw
-alias python=py
-alias v=vi
-alias vi=vim
-alias vim='nvim'
-which nvim &> /dev/null && alias vi='vim'
-which exa &> /dev/null && alias ls='exa'
-alias t='tmux'
-alias ta='t attach -t'
-alias td='t attach -d -t'
-alias tl='t list-sessions'
-alias gnvim='goneovim'
-alias gv='gnvim'
-
 #export VIM=/usr/local/share/nvim
 #export VIMRUNTIME=/usr/local/share/nvim/runtime
 
 export EDITOR=vi
-if [ $PLATFORM = "Linux" ]; then
-    alias pc='proxychains-ng -q'
-fi
-
 export PATH="/usr/local/opt/gettext/bin:$PATH"
 export PATH="/usr/local/opt/ncurses/bin:$PATH"
+export PATH=$PATH:~/.platformio/penv/bin
 
-
+source "$HOME/.cargo/env"
+. "$HOME/.cargo/env"
