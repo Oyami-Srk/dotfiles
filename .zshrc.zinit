@@ -171,3 +171,7 @@ fi
 if [[ -f "$HOME/.zsh_alias" ]]; then
     source $HOME/.zsh_alias
 fi
+
+if [[ -f "$HOME/.zprofile" ]]; then
+    source $HOME/.zprofile
+fi

@@ -58,3 +58,11 @@ export PATH=$PATH:~/.platformio/penv/bin
 
 source "$HOME/.cargo/env"
 . "$HOME/.cargo/env"
+
+if [ $PLATFORM = "Darwin" ]; then
+    export ANDROID_HOME=$HOME/Library/Android/sdk
+    export PATH=$PATH:$ANDROID_HOME/emulator
+    export PATH=$PATH:$ANDROID_HOME/tools
+    export PATH=$PATH:$ANDROID_HOME/tools/bin
+fi
+export PATH=$PATH:$ANDROID_HOME/platform-tools
