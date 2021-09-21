@@ -1,9 +1,9 @@
 export PLATFORM="$(uname 2> /dev/null)"
 
-export GOROOT=/usr/local/opt/go/libexec
+# export GOROOT=/usr/local/opt/go/libexec
 # GOPAT为上面创建的目录路径
-export GOPATH=$HOME/Projects/golang
-export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+# export GOPATH=$HOME/Projects/golang
+# export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 export PATH=$PATH:$HOME/.config/ubin
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
@@ -26,10 +26,10 @@ if [ $PLATFORM = "Darwin" ]; then
 fi
 
 # Check whether clash is start and export proxy env
-if sh -c 'LANG=C netstat -an | grep "\(\.\|\:\)7890.*LISTEN"' &> /dev/null; then
+if sh -c 'LANG=C ss -lntu | grep LISTEN.*7890' &> /dev/null; then
     PROXY_SERVER=127.0.0.1
     HTTP_PORT=7890
-    SOCKS_PORT=7891
+    SOCKS_PORT=7890
     export https_proxy=http://$PROXY_SERVER:$HTTP_PORT http_proxy=http://$PROXY_SERVER:$HTTP_PORT all_proxy=socks5://$PROXY_SERVER:$SOCKS_PORT no_proxy=localhost,127.0.0.0/8,*.local
     export HTTPS_PROXY=http://$PROXY_SERVER:$HTTP_PORT HTTP_PROXY=http://$PROXY_SERVER:$HTTP_PORT ALL_PROXY=socks5://$PROXY_SERVER:$SOCKS_PORT NO_PROXY=localhost,127.0.0.0/8,*.local
     # if [ $PLATFORM = "Linux" ]; then
@@ -51,7 +51,7 @@ fi
 #export VIM=/usr/local/share/nvim
 #export VIMRUNTIME=/usr/local/share/nvim/runtime
 
-export EDITOR=vi
+export EDITOR=nvim
 export PATH="/usr/local/opt/gettext/bin:$PATH"
 export PATH="/usr/local/opt/ncurses/bin:$PATH"
 export PATH=$PATH:~/.platformio/penv/bin

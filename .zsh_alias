@@ -29,3 +29,9 @@ if [ $PLATFORM = "Darwin" ]; then
     alias petxt='pe text --txt'
     alias pc='proxychains4 -q'
 fi
+
+if [ $PLATFORM = "Linux" ]; then
+    alias pc='proxychains -q'
+    alias pbpaste='xclip -o sel'
+    alias pbcopy='xclip -sel clip'
+fi
