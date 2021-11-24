@@ -17,6 +17,11 @@ fi
 ZSH_AUTOSUGGEST_USE_ASYNC=true
 ZSH_ALIAS_FINDER_AUTOMATIC=true
 
+## History file configuration
+[ -z "$HISTFILE" ] && HISTFILE="$HOME/.zsh_history"
+[ "$HISTSIZE" -lt 50000 ] && HISTSIZE=50000
+[ "$SAVEHIST" -lt 10000 ] && SAVEHIST=10000
+
 ZINIT_DIR="${ZDOTDIR:-${HOME}}/.zinit"
 ZINIT_SOURCE="${ZINIT_DIR}/bin/zinit.zsh"
 

@@ -65,4 +65,7 @@ if [ $PLATFORM = "Darwin" ]; then
     export PATH=$PATH:$ANDROID_HOME/tools
     export PATH=$PATH:$ANDROID_HOME/tools/bin
 fi
+if [ $PLATFORM = "Linux" ]; then
+    alias open=xdg-open
+fi
 export PATH=$PATH:$ANDROID_HOME/platform-tools
