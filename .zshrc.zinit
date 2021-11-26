@@ -31,7 +31,7 @@ if [[ ! -f "$ZINIT_SOURCE" ]]; then
 
     [[ ! -d "$ZINIT_DIR" ]] && mkdir -p "$ZINIT_DIR" 2> /dev/null
 
-    local repo_url="https://github.com/zdharma/zinit.git"
+    local repo_url="https://github.com/zdharma-continuum/zinit.git"
 
     if [[ ! -x "`which git`" ]]; then
         echo "WTF? Even git is missing..."
@@ -54,7 +54,7 @@ source $ZINIT_SOURCE
 
 # zinit load plugins
 zinit ice lucid wait='0' atinit='zpcompinit'
-zinit light zdharma/fast-syntax-highlighting
+zinit light zdharma-continuum/fast-syntax-highlighting
 zinit ice lucid wait="0" atload='_zsh_autosuggest_start'
 zinit light zsh-users/zsh-autosuggestions
 zinit ice lucid wait='0'
