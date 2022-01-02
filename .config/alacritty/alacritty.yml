@@ -320,7 +320,7 @@ shell:
     - --login
     - -l
     - -c
-    - "tmux"
+    - "tmux attach || tmux"
 
 # Startup directory
 #
