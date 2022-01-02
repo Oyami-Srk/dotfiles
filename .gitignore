@@ -6,6 +6,7 @@
 !.config/i3
 !.config/compton.conf
 !.config/ibus
+!.config/ubin
 !.tmux
 /.config/ibus/bus
 /.config/ibus/rime/
@@ -16,5 +17,6 @@
 !.spacemacs
 !.xprofile
 !.Xresources
+!.ideavimrc
 !.xinitrc
 !README.org
