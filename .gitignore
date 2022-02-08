@@ -8,6 +8,8 @@
 !.config/ibus
 !.config/ubin
 !.tmux
+!.config/nvim/
+.config/nvim/plugged
 /.config/ibus/bus
 /.config/ibus/rime/
 !.config/ubin
@@ -20,4 +22,3 @@
 !.ideavimrc
 !.xinitrc
 !README.org
-!.config/nvim/*
