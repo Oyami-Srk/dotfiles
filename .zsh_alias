@@ -23,6 +23,7 @@ alias td='t attach -d -t'
 alias tl='t list-sessions'
 alias gnvim='goneovim'
 alias gv='gnvim'
+alias minicom='env LANGUAGE=en LANG=en_US.UTF-8 minicom'
 
 if [ $PLATFORM = "Darwin" ]; then
     alias pe='python-escpos'

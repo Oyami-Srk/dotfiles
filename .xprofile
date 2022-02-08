@@ -3,4 +3,6 @@ export QT_IM_MODULE=fcitx
 export XMODIFIERS=@im=fcitx
 export XIMO=fcitx
 gnome-keyring-daemon --start --components=pkcs11,secrets,ssh
-
+export LIBVA_DRIVER_NAME=vdpau
+export LIBVA_DRIVERS_PATH=/usr/lib/dri/
+export VDPAU_DRIVER=nvidia
