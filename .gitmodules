@@ -1,3 +1,6 @@
 [submodule ".tmux"]
 	path = .tmux
 	url = https://github.com/gpakosz/.tmux
+[submodule ".config/rime/rime-repos/rime-luna-pinyin"]
+	path = .config/rime/rime-repos/rime-luna-pinyin
+	url = https://github.com/rime/rime-luna-pinyin
