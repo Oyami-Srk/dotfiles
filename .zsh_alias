@@ -24,6 +24,14 @@ alias tl='t list-sessions'
 alias gnvim='goneovim'
 alias gv='gnvim'
 alias minicom='env LANGUAGE=en LANG=en_US.UTF-8 minicom'
+alias hd="hexdump -ve '\"0x%08.8_ax  |  \" 4/1 \"%.2x \"   \"  \"4/1 \"%.2x \"   \"  \"4/1 \"%.2x \"   \"  \"4/1 \"%.2x \" ' -e '\" | \" 16/1 \"%_p\" \"\|\n\"'"
+
+alias r64objdump="riscv64-elf-objdump"
+alias r64objcopy="riscv64-elf-objcopy"
+alias r64gcc="riscv64-elf-gcc"
+alias r64ld="riscv64-elf-ld"
+alias r64g++="riscv64-elf-g++"
+alias r64gdb="riscv64-elf-gdb"
 
 if [ $PLATFORM = "Darwin" ]; then
     alias pe='python-escpos'

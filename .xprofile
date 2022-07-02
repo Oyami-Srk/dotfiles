@@ -3,6 +3,8 @@ export QT_IM_MODULE=fcitx
 export XMODIFIERS=@im=fcitx
 export XIMO=fcitx
 gnome-keyring-daemon --start --components=pkcs11,secrets,ssh
-export LIBVA_DRIVER_NAME=vdpau
+export LIBVA_DRIVER_NAME=radeonsi
 export LIBVA_DRIVERS_PATH=/usr/lib/dri/
-export VDPAU_DRIVER=nvidia
+
+# xrandr --output DVI-I-0 --off --output DVI-I-1 --off --output HDMI-0 --mode 1920x1080 --pos 0x857 --rotate right --output DP-0 --primary --mode 3840x2160 --pos 1350x0 --rotate normal --output DP-1 --off --output DVI-D-0 --off --output HDMI-0 --scale 1.25x1.25
+xrandr --output HDMI-A-0 --mode 1920x1080 --pos 0x857 --rotate right --scale 1.25x1.25 --output DisplayPort-0 --primary --mode 3840x2160 --pos 1350x0 --rotate normal

@@ -56,4 +56,6 @@ XTerm*locale: zh_CN.UTF-8
 XTerm*utf8: true
 XTerm*utf8Title: true
 
-! Xft.dpi: 96
+Xft.dpi: 144
+Xft.hinting: true
+Xft.antialias: true
