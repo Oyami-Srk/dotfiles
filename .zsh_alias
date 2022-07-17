@@ -33,9 +33,10 @@ alias r64ld="riscv64-elf-ld"
 alias r64g++="riscv64-elf-g++"
 alias r64gdb="riscv64-elf-gdb"
 
+alias pe='python-escpos'
+alias petxt='pe text --txt'
+
 if [ $PLATFORM = "Darwin" ]; then
-    alias pe='python-escpos'
-    alias petxt='pe text --txt'
     alias pc='proxychains4 -q'
 fi
 

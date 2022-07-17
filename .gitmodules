@@ -3,4 +3,4 @@
 	url = https://github.com/gpakosz/.tmux
 [submodule ".config/rime"]
 	path = .config/rime
-	url = git@github.com:Oyami-Srk:rime-conf
+	url = git@github.com:Oyami-Srk/rime-conf
