@@ -47,9 +47,9 @@ if sh -c 'LANG=C ss -lntu | grep LISTEN.*7890' &>/dev/null; then
     PROXY_SERVER="127.0.0.1"
 elif [ -f /.dockerenv ]; then
     PROXY_SERVER="172.17.0.1"
-elif [[ $PLATFORM == "WSL" && -f /etc/resolv.conf ]]; then
+elif [[ $PLATFORM == "WSL2" && -f /etc/resolv.conf ]]; then
     PROXY_SERVER=$(sed -n "s/^nameserver\s\(.*\)$/\1/p" /etc/resolv.conf)
-elif [[ $PLATFORM == "MSYS" ]]; then
+else
     PROXY_SERVER="127.0.0.1"
 fi
 export https_proxy=http://$PROXY_SERVER:$HTTP_PORT http_proxy=http://$PROXY_SERVER:$HTTP_PORT all_proxy=socks5://$PROXY_SERVER:$SOCKS_PORT no_proxy=localhost,127.0.0.0/8,*.local
