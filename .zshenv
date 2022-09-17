@@ -1,12 +1,27 @@
-export PLATFORM="$(uname 2> /dev/null)"
+PLATFORM="$(uname 2>/dev/null)"
+[[ "$PLATFORM" == *NT* ]] && PLATFORM="MSYS"
+if [ $PLATFORM = "Linux" ] || [ ! -z ${WSL_DISTRO_NAME} ]; then
+    local WSL2_Flag="$(cat /proc/interrupts )"
+    if [[ $WSL2_Flag ]] ; then
+        PLATFORM="WSL2"
+    else
+        PLATFORM="WSL1"
+    fi
+fi
+export PLATFORM
+if [ $PLATFORM = "Darwin" ]; then
+elif [ $PLATFORM = "Linux" ]; then
+elif [ $PLATFORM = "WSL1" ]; then
+elif [ $PLATFORM = "WSL2" ]; then
+elif [ $PLATFORM = "MSYS" ]; then
+else
+    echo "Your platform ${PLATFORM} is not inside one of my collects."
+fi
 
-# export GOROOT=/usr/local/opt/go/libexec
-# GOPAT为上面创建的目录路径
-# export GOPATH=$HOME/Projects/golang
-# export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 export PATH=$PATH:$HOME/.config/ubin
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
 
 export SSH_KEY_PATH="~/.ssh/id_rsa"
 
@@ -26,46 +41,54 @@ if [ $PLATFORM = "Darwin" ]; then
 fi
 
 # Check whether clash is start and export proxy env
-if sh -c 'LANG=C ss -lntu | grep LISTEN.*7890' &> /dev/null; then
-    PROXY_SERVER=127.0.0.1
-    HTTP_PORT=7890
-    SOCKS_PORT=7890
-    export https_proxy=http://$PROXY_SERVER:$HTTP_PORT http_proxy=http://$PROXY_SERVER:$HTTP_PORT all_proxy=socks5://$PROXY_SERVER:$SOCKS_PORT no_proxy=localhost,127.0.0.0/8,*.local
-    export HTTPS_PROXY=http://$PROXY_SERVER:$HTTP_PORT HTTP_PROXY=http://$PROXY_SERVER:$HTTP_PORT ALL_PROXY=socks5://$PROXY_SERVER:$SOCKS_PORT NO_PROXY=localhost,127.0.0.0/8,*.local
-    # if [ $PLATFORM = "Linux" ]; then
-        # if which gsettings &> /dev/null; then
-           # gsettings set org.gnome.system.proxy mode 'manual'
-           # gsettings set org.gnome.system.proxy.http host '$PROXY_SERVER'
-           # gsettings set org.gnome.system.proxy.http port $HTTP_PORT
-        # fi
-    # fi
+HTTP_PORT=7890
+SOCKS_PORT=7890
+if sh -c 'LANG=C ss -lntu | grep LISTEN.*7890' &>/dev/null; then
+    PROXY_SERVER="127.0.0.1"
 elif [ -f /.dockerenv ]; then
-    PROXY_SERVER=172.17.0.1
-    HTTP_PORT=7890
-    SOCKS_PORT=7891
-    export https_proxy=http://$PROXY_SERVER:$HTTP_PORT http_proxy=http://$PROXY_SERVER:$HTTP_PORT all_proxy=socks5://$PROXY_SERVER:$SOCKS_PORT no_proxy=localhost,127.0.0.0/8,*.local,172.17.0.0/8
-    export HTTPS_PROXY=http://$PROXY_SERVER:$HTTP_PORT HTTP_PROXY=http://$PROXY_SERVER:$HTTP_PORT ALL_PROXY=socks5://$PROXY_SERVER:$SOCKS_PORT NO_PROXY=localhost,127.0.0.0/8,*.local,172.17.0.0/8
- 
+    PROXY_SERVER="172.17.0.1"
+elif [[ $PLATFORM == "WSL" && -f /etc/resolv.conf ]]; then
+    PROXY_SERVER=$(sed -n "s/^nameserver\s\(.*\)$/\1/p" /etc/resolv.conf)
+elif [[ $PLATFORM == "MSYS" ]]; then
+    PROXY_SERVER="127.0.0.1"
 fi
+export https_proxy=http://$PROXY_SERVER:$HTTP_PORT http_proxy=http://$PROXY_SERVER:$HTTP_PORT all_proxy=socks5://$PROXY_SERVER:$SOCKS_PORT no_proxy=localhost,127.0.0.0/8,*.local
+export HTTPS_PROXY=http://$PROXY_SERVER:$HTTP_PORT HTTP_PROXY=http://$PROXY_SERVER:$HTTP_PORT ALL_PROXY=socks5://$PROXY_SERVER:$SOCKS_PORT NO_PROXY=localhost,127.0.0.0/8,*.local
 
-#export VIM=/usr/local/share/nvim
-#export VIMRUNTIME=/usr/local/share/nvim/runtime
-
-export EDITOR=nvim
+[[ -f $(which nvim) ]] && export EDITOR=nvim
 export PATH="/usr/local/opt/gettext/bin:$PATH"
 export PATH="/usr/local/opt/ncurses/bin:$PATH"
-export PATH=$PATH:~/.platformio/penv/bin
+export PATH=$PATH:$HOME/.platformio/penv/bin
 
-source "$HOME/.cargo/env"
-. "$HOME/.cargo/env"
+[[ -f "$HOME/.cargo/env" ]] && source "$HOME/.cargo/env"
 
 if [ $PLATFORM = "Darwin" ]; then
     export ANDROID_HOME=$HOME/Library/Android/sdk
     export PATH=$PATH:$ANDROID_HOME/emulator
     export PATH=$PATH:$ANDROID_HOME/tools
     export PATH=$PATH:$ANDROID_HOME/tools/bin
-fi
-if [ $PLATFORM = "Linux" ]; then
+    export PATH=$PATH:$ANDROID_HOME/platform-tools
+    export PATH="/usr/local/opt/make/libexec/gnubin:$PATH"
+elif [ $PLATFORM = "Linux" ]; then
     alias open=xdg-open
+elif [ $PLATFORM = "MSYS" ]; then
+    export ZLUA_EXEC="/msys2-lua.exe"
+    function msys2-open() {
+    	if [[ -f "$1" ]]; then
+	    powershell.exe -c start "$1"
+        else
+	    explorer.exe $(echo "$1" | sed "s/\//\\\\/g")
+	fi
+    }
+    alias open="msys2-open"
+elif [ $PLATFORM = "WSL1" ] || [ $PLATFORM = "WSL2" ]; then
+    function wsl-open() {
+        if [[ -f "$1" ]]; then
+	    powershell.exe -c start "$1"
+	else
+	    explorer.exe "$1"
+	fi
+    }
+    alias open="wsl-open"
 fi
-export PATH=$PATH:$ANDROID_HOME/platform-tools
+

@@ -2,7 +2,7 @@
 
 [[ ! -z "${ZPROF}" ]] && zmodload zsh/zprof
 
-export LC_CTYPE=en_US.UTF-8
+# export LC_CTYPE=en_US.UTF-8
 
 if [[ -o login ]]; then
 	[ -f "$HOME/.config/login.sh" ] && sh "$HOME/.config/login.sh"
@@ -61,6 +61,7 @@ zinit ice lucid wait='0'
 zinit light zsh-users/zsh-completions
 zinit ice lucid wait='0'
 zinit light Tarrasch/zsh-bd
+# MSYS2 need msys2-lua instead mingw64-lua
 zinit ice lucid wait='0'
 zinit light skywind3000/z.lua
 zinit ice lucid wait='0'
@@ -105,8 +106,6 @@ zinit snippet OMZ::plugins/alias-finder/alias-finder.plugin.zsh
 # zinit light sei40kr/fast-alias-tips-bin
 # zinit ice wait lucid
 # zinit light sei40kr/zsh-fast-alias-tips
-if [[ $OSTYPE =~ "darwin" ]]; then
-fi
 
 # Theme
 if which disable_starship &> /dev/null; then
@@ -117,6 +116,10 @@ else
     local ret_status="%F{blue}[%s%?]"
     PS1='%F{green}%2c%F{blue} >  %f'
     RPROMPT='$(git_prompt_info) %F{green}%D{%H:%M:%S} $ret_status'
+    if [ $PLATFORM = "MSYS" ]; then
+        # git prompt info is too slow on msys2
+        RPROMPT='%F{green}%D{%H:%M:%S} $ret_status'
+    fi
 
     ZSH_THEME_GIT_PROMPT_PREFIX="%F{yellow}"
     ZSH_THEME_GIT_PROMPT_SUFFIX="%f"
@@ -160,9 +163,7 @@ if [ $PLATFORM = "Darwin" ]; then
     export PATH="/usr/local/opt/make/libexec/gnubin:$PATH"
 fi
 
-
 [[ ! -z "${ZPROF}" ]] && zprof
-
 
 autoload -U +X compinit && compinit
 #compdef pio
