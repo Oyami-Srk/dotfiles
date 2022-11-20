@@ -80,7 +80,7 @@ if [ $PLATFORM = "Darwin" ]; then
     alias_darwin
 elif [ $PLATFORM = "Linux" ]; then
     alias_linux
-elif [ $PLATFORM = "WSL" ]; then
+elif [ $PLATFORM = "WSL1" ] || [ $PLATFORM = "WSL2" ]; then
     alias_wsl
 elif [ $PLATFORM = "MSYS" ]; then
     alias_msys2

@@ -1,12 +1,12 @@
 PLATFORM="$(uname 2>/dev/null)"
 [[ "$PLATFORM" == *NT* ]] && PLATFORM="MSYS"
 if [ $PLATFORM = "Linux" ] || [ ! -z ${WSL_DISTRO_NAME} ]; then
-    local WSL2_Flag="$(cat /proc/interrupts )"
-    if [[ $WSL2_Flag ]] ; then
+    if [[ "$(cat /proc/interrupts)" ]]; then
         PLATFORM="WSL2"
     else
         PLATFORM="WSL1"
     fi
+    export WSL_ROOT_PATH="\\\\wsl.localhost\\${WSL_DISTRO_NAME}"
 fi
 export PLATFORM
 if [ $PLATFORM = "Darwin" ]; then
@@ -74,21 +74,25 @@ elif [ $PLATFORM = "Linux" ]; then
 elif [ $PLATFORM = "MSYS" ]; then
     export ZLUA_EXEC="/msys2-lua.exe"
     function msys2-open() {
-    	if [[ -f "$1" ]]; then
-	    powershell.exe -c start "$1"
+        if [[ -f "$1" ]]; then
+            powershell.exe -c start "$1"
         else
-	    explorer.exe $(echo "$1" | sed "s/\//\\\\/g")
-	fi
+            explorer.exe $(echo "$1" | sed "s/\//\\\\/g")
+        fi
     }
     alias open="msys2-open"
 elif [ $PLATFORM = "WSL1" ] || [ $PLATFORM = "WSL2" ]; then
     function wsl-open() {
-        if [[ -f "$1" ]]; then
-	    powershell.exe -c start "$1"
-	else
-	    explorer.exe "$1"
-	fi
+        local rp="$(realpath $1)"
+        if [[ $rp == /mnt/* ]]; then
+            # Path is locate on windows volume
+            local rp=$(sed "s/^.\{5\}//;s/\//\\\\/g;s/\(.\)/\1:/" <<<"$rp")
+            explorer.exe $rp
+        else
+            # Path is locate on wsl volume
+            local rp=$(sed "s/\//\\\\/g" <<<"$rp")
+            explorer.exe "$WSL_ROOT_PATH$rp"
+        fi
     }
     alias open="wsl-open"
 fi
-
