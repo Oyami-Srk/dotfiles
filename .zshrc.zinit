@@ -19,8 +19,8 @@ ZSH_ALIAS_FINDER_AUTOMATIC=true
 
 ## History file configuration
 [ -z "$HISTFILE" ] && HISTFILE="$HOME/.zsh_history"
-[ "$HISTSIZE" -lt 50000 ] && HISTSIZE=50000
-[ "$SAVEHIST" -lt 10000 ] && SAVEHIST=10000
+[ "$HISTSIZE" -lt 5000000 ] && HISTSIZE=500000
+[ "$SAVEHIST" -lt 1000000 ] && SAVEHIST=100000
 
 ZINIT_DIR="${ZDOTDIR:-${HOME}}/.zinit"
 ZINIT_SOURCE="${ZINIT_DIR}/bin/zinit.zsh"
@@ -181,3 +181,16 @@ fi
 if [[ -f "$HOME/.zprofile" ]]; then
     source $HOME/.zprofile
 fi
+
+export NVM_DIR="$HOME/.config/nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+source '/home/shiroko/.config/nvm/versions/node/v18.17.1/lib/node_modules/@hyperupcall/autoenv/activate.sh'
+
+# pnpm
+export PNPM_HOME="/home/shiroko/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
