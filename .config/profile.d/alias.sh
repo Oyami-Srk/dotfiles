@@ -15,23 +15,28 @@ function try_alias() {
 }
 
 function alias_linux() {
+    alias open=xdg-open
     alias pc='proxychains -q'
     alias pbpaste='xclip -o sel'
     alias pbcopy='xclip -sel clip'
 }
 
-function alias_darwin() {
-    alias pc='proxychains4 -q'
-}
-
 function alias_wsl() {
     alias pbcopy='clip.exe'
     alias pbpaste="powershell.exe Get-Clipboard | perl -pe 's/^\r\n$//g ; s/\r\n/\n/g;'"
-}
-
-function alias_msys2() {
-    alias pbcopy='clip.exe'
-    alias pbpaste="powershell.exe Get-Clipboard | perl -pe 's/^\r\n$//g ; s/\r\n/\n/g;'"
+    function wsl-open() {
+        local rp="$(realpath $1)"
+        if [[ $rp == /mnt/* ]]; then
+            # Path is locate on windows volume
+            local rp=$(sed "s/^.\{5\}//;s/\//\\\\/g;s/\(.\)/\1:/" <<<"$rp")
+            explorer.exe $rp
+        else
+            # Path is locate on wsl volume
+            local rp=$(sed "s/\//\\\\/g" <<<"$rp")
+            explorer.exe "$WSL_ROOT_PATH$rp"
+        fi
+    }
+    alias open="wsl-open"
 }
 
 function alias_common() {
@@ -76,19 +81,12 @@ function alias_common() {
 
 alias_common
 
-if [ $PLATFORM = "Darwin" ]; then
-    alias_darwin
-elif [ $PLATFORM = "Linux" ]; then
+if [ $SHELL_PLATFORM = "Linux" ]; then
     alias_linux
-elif [ $PLATFORM = "WSL1" ] || [ $PLATFORM = "WSL2" ]; then
+elif [ $SHELL_PLATFORM = "WSL1" ] || [ $SHELL_PLATFORM = "WSL2" ]; then
     alias_wsl
-elif [ $PLATFORM = "MSYS" ]; then
-    alias_msys2
 fi
 
 unfunction alias_common
 unfunction alias_linux
-unfunction alias_darwin
-unfunction alias_msys2
 unfunction alias_wsl
-
