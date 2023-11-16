@@ -7,6 +7,7 @@
 !.config/compton.conf
 !.config/ibus
 !.config/ubin
+/.config/ubin/*
 !.tmux
 !.config/nvim/
 .config/nvim/plugged

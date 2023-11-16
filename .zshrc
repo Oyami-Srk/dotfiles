@@ -159,6 +159,4 @@ if [[ "$(basename -- ${(%):-%x})" != "_pio" ]]; then
   compdef _pio pio
 fi
 
-[ -f "$HOME/.zprofile" ] && source $HOME/.zprofile
-
 [[ ! -z "${ZPROF}" ]] && zprof
