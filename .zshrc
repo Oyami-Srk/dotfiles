@@ -45,6 +45,10 @@ fi
 
 source $ZINIT_SOURCE
 
+# zinit load annex
+zinit ice lucid wait='0'
+zinit light NICHOLAS85/z-a-eval
+
 # zinit load plugins
 zinit ice lucid wait='0' atinit='zpcompinit'
 zinit light zdharma-continuum/fast-syntax-highlighting
@@ -99,7 +103,13 @@ zinit snippet OMZ::plugins/alias-finder/alias-finder.plugin.zsh
 # zinit light sei40kr/fast-alias-tips-bin
 # zinit ice wait lucid
 # zinit light sei40kr/zsh-fast-alias-tips
+zinit ice as"program" from"gh-r" mv"rtx* -> rtx" \
+    atclone"chmod +x ./rtx; ./rtx activate zsh > init.zsh" \
+    src"init.zsh" nocompile'!'
+zinit light jdx/rtx
+# ./rtx activate zsh > init.zsh
 
+    # eval "./rtx activate zsh" 
 # Theme
 if which disable_starship &> /dev/null; then
     eval $(starship init zsh)
