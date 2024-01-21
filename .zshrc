@@ -45,27 +45,23 @@ fi
 
 source $ZINIT_SOURCE
 
-# zinit load annex
-zinit ice lucid wait='0'
-zinit light NICHOLAS85/z-a-eval
-
 # zinit load plugins
-zinit ice lucid wait='0' atinit='zpcompinit'
+zinit ice lucid wait atinit='zpcompinit'
 zinit light zdharma-continuum/fast-syntax-highlighting
 zinit ice lucid wait="0" atload='_zsh_autosuggest_start'
 zinit light zsh-users/zsh-autosuggestions
-zinit ice lucid wait='0'
+zinit ice lucid wait
 zinit light zsh-users/zsh-completions
-zinit ice lucid wait='0'
+zinit ice lucid wait
 zinit light Tarrasch/zsh-bd
 # MSYS2 need msys2-lua instead mingw64-lua
-zinit ice lucid wait='0'
-zinit light skywind3000/z.lua
-zinit ice lucid wait='0'
+# zinit ice lucid wait
+# zinit light skywind3000/z.lua
+zinit ice lucid wait
 zinit light arzzen/calc.plugin.zsh
-zinit ice lucid wait='0'
+zinit ice lucid wait
 zinit light hlissner/zsh-autopair
-zinit ice lucid wait='0' as"null" atinit'fpath+=( $PWD );' atload"autoload -U deer;zle -N deer;bindkey '\ek' deer;"
+zinit ice lucid wait as"null" atinit'fpath+=( $PWD );' atload"autoload -U deer;zle -N deer;bindkey '\ek' deer;"
 zinit light Vifon/deer
 
 zinit ice wait lucid
@@ -103,13 +99,17 @@ zinit snippet OMZ::plugins/alias-finder/alias-finder.plugin.zsh
 # zinit light sei40kr/fast-alias-tips-bin
 # zinit ice wait lucid
 # zinit light sei40kr/zsh-fast-alias-tips
-zinit ice as"program" from"gh-r" mv"rtx* -> rtx" \
-    atclone"chmod +x ./rtx; ./rtx activate zsh > init.zsh" \
-    src"init.zsh" nocompile'!'
-zinit light jdx/rtx
-# ./rtx activate zsh > init.zsh
+zinit ice from"gh-r" as"program"
+zinit light junegunn/fzf
 
-    # eval "./rtx activate zsh" 
+zinit ice as"program" from"gh-r" mv"mise* -> mise" \
+    atclone"$PWD/mise activate zsh > init.zsh"  atpull"%atclone" src"init.zsh" nocompile'!'
+zinit light jdx/mise
+
+zinit ice wait lucid as"program" from"gh-r" \
+    atclone"./zoxide init zsh > init.zsh"  atpull"%atclone" src"init.zsh" nocompile'!'
+zinit light ajeetdsouza/zoxide
+
 # Theme
 if which disable_starship &> /dev/null; then
     eval $(starship init zsh)
@@ -159,14 +159,5 @@ export TERM=xterm-256color
 unset LSCOLORS
 export CLICOLOR=1
 export CLICOLOR_FORCE=1
-
-autoload -U +X compinit && compinit
-#compdef pio
-_pio() {
-  eval $(env COMMANDLINE="${words[1,$CURRENT]}" _PIO_COMPLETE=complete-zsh  pio)
-}
-if [[ "$(basename -- ${(%):-%x})" != "_pio" ]]; then
-  compdef _pio pio
-fi
 
 [[ ! -z "${ZPROF}" ]] && zprof

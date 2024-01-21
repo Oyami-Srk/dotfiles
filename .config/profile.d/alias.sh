@@ -24,6 +24,8 @@ function alias_linux() {
 function alias_wsl() {
     alias pbcopy='clip.exe'
     alias pbpaste="powershell.exe Get-Clipboard | perl -pe 's/^\r\n$//g ; s/\r\n/\n/g;'"
+    # alias pbcopy='win32yank.exe -i'
+    # alias pbpaste='win32yank.exe -o'
     function wsl-open() {
         local rp="$(realpath $1)"
         if [[ $rp == /mnt/* ]]; then
