@@ -103,7 +103,7 @@ zinit ice from"gh-r" as"program"
 zinit light junegunn/fzf
 
 zinit ice as"program" from"gh-r" mv"mise* -> mise" \
-    atclone"$PWD/mise activate zsh > init.zsh"  atpull"%atclone" src"init.zsh" nocompile'!'
+    atclone"\$(pwd)/mise activate zsh > init.zsh"  atpull"%atclone" src"init.zsh" nocompile'!'
 zinit light jdx/mise
 
 zinit ice wait lucid as"program" from"gh-r" \
