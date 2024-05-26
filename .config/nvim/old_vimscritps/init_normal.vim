@@ -1,14 +1,3 @@
-" Files
-set nobackup
-set nowritebackup
-
-" Visual Effect
-set cmdheight=1
-set updatetime=300
-set signcolumn=yes
-set cursorline
-set t_Co=256
-set termguicolors
 
 " Correct RGB escape codes for vim inside tmux
 if has('termguicolors')
@@ -18,43 +7,9 @@ if has('termguicolors')
   hi! Normal ctermbg=NONE guibg=NONE 
 endif
 
-" Language
-set langmenu=en_US
-set fileencodings=utf-8,chinese,ucs-bom,cp936
-set fileencoding=utf-8
-set fencs=utf-8,gbk,ucs-bom,shift-jis,gb18030,cp936
-set termencoding=utf-8
-
-" Line number
-set number
-set relativenumber
-
-" Search
-set ignorecase
-set smartcase
-set incsearch
-
-" Indent
-set autoindent
-set smartindent
-set tabstop=4
-set shiftwidth=4
-set softtabstop=4
-set smarttab
-set expandtab
-set backspace=indent,eol,start
-
-" Mouse
-set mouse=a
-
-" Clipboard
-set clipboard=unnamedplus
-
 " Plugins
 call plug#begin()
 
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
 " Plug 'junegunn/vim-easy-align'
 " Plug 'jiangmiao/auto-pairs'
 " Use coc-pairs instead
