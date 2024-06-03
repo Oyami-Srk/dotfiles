@@ -31,14 +31,14 @@ vim.o.expandtab = true
 vim.o.backspace = "indent,eol,start"
 
 -- Color
-vim.o.t_Co = 256
+-- vim.o.t_Co = 256
 vim.o.termguicolors = true
 
 -- Language
 vim.o.langmenu = "en_US"
 vim.o.fileencodings = "utf-8,gbk,ucs-bom,shift-jis,gb18030,cp936"
 vim.o.fileencoding = "utf-8"
-vim.o.termencoding = "utf-8"
+-- vim.o.termencoding = "utf-8"
 
 -- Search
 vim.o.ignorecase = true

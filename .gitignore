@@ -23,3 +23,5 @@
 !.ideavimrc
 !.xinitrc
 !README.org
+!.config/env.d
+/.config/env.d/00-*.sh

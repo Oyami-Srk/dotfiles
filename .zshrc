@@ -64,6 +64,7 @@ zinit light hlissner/zsh-autopair
 zinit ice lucid wait as"null" atinit'fpath+=( $PWD );' atload"autoload -U deer;zle -N deer;bindkey '\ek' deer;"
 zinit light Vifon/deer
 
+zinit snippet OMZ::lib/async_prompt.zsh
 zinit ice wait lucid
 zinit snippet OMZ::lib/completion.zsh
 zinit snippet OMZ::lib/git.zsh

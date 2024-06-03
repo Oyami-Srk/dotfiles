@@ -18,6 +18,20 @@ function try_append_if_dir_exists() {
     fi
 }
 
+function update_export() {
+    local p="$1"
+    local name="${p%%=*}"
+    local value="${p#*=}"
+    if [[ -v "$name" ]]; then
+        if [ ${(P)name} != $value ]; then
+            echo "Updating "$name" to "$value" from "${(P)name}""
+            export $name="$value"
+        fi
+    else
+        export $name=$value
+    fi
+}
+
 # Content of environment
 SHELL_PLATFORM="$(uname 2>/dev/null)"
 [[ "$SHELL_PLATFORM" == *NT* ]] && SHELL_PLATFORM="MSYS"
@@ -32,14 +46,14 @@ fi
 export SHELL_PLATFORM
 export SSH_KEY_PATH="~/.ssh/id_rsa"
 
-[[ -f $(which nvim) ]] && export EDITOR=nvim
-
 # environment profiles
-if [ -d $HOME/.config/profile.d ]; then
-    for i in $HOME/.config/profile.d/*.sh; do
+if [ -d $HOME/.config/env.d ]; then
+    for i in $HOME/.config/env.d/*.sh; do
         if [ -r $i ]; then
             source $i
         fi
     done
     unset i
 fi
+
+[[ -f $(which nvim) ]] && export EDITOR="nvim"
