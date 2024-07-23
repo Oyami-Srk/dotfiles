@@ -1,8 +1,8 @@
-function must_require(module)
+function Must_require(module)
     return require(module)
 end
 
-function try_require(module)
+function Try_require(module)
     local ok, r = pcall(require, module)
     if ok then
         return r
@@ -12,8 +12,8 @@ function try_require(module)
 end
 
 if vim.g.vscode ~= nil then
-    try_require("vscode")
+    Try_require("vscode")
 else
-    must_require("standalong")
+    Must_require("standalong")
 end
-must_require("global")
+Must_require("global")

@@ -1,5 +1,5 @@
 -- Load options for Neovim built-in features.
-must_require("built-in-options")
+Must_require("built-in-options")
 
 -- Initial lazy.nvim plugin manager
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -16,4 +16,17 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 -- Load plugins
-require("lazy").setup("plugins")
+local function load_plugins()
+    local spec = {
+        { import = "plugins/common" }
+    }
+    if vim.g.vscode ~= nil then
+        spec[#spec + 1] = { import = "plugins/vscode" }
+    else
+        spec[#spec + 1] = { import = "plugins/standalong" }
+    end
+
+    require("lazy").setup(spec)
+end
+
+load_plugins()
