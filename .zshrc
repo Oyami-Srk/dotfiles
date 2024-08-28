@@ -48,7 +48,7 @@ source $ZINIT_SOURCE
 # zinit load plugins
 zinit ice lucid wait atinit='zpcompinit'
 zinit light zdharma-continuum/fast-syntax-highlighting
-zinit ice lucid wait="0" atload='_zsh_autosuggest_start'
+zinit ice lucid wait atload='_zsh_autosuggest_start'
 zinit light zsh-users/zsh-autosuggestions
 zinit ice lucid wait
 zinit light zsh-users/zsh-completions
@@ -65,49 +65,50 @@ zinit ice lucid wait as"null" atinit'fpath+=( $PWD );' atload"autoload -U deer;z
 zinit light Vifon/deer
 
 zinit snippet OMZ::lib/async_prompt.zsh
-zinit ice wait lucid
-zinit snippet OMZ::lib/completion.zsh
 zinit snippet OMZ::lib/git.zsh
-zinit ice wait lucid
+
+zinit ice lucid wait
+zinit snippet OMZ::lib/completion.zsh
+zinit ice lucid wait
 zinit snippet OMZ::lib/history.zsh
 zinit snippet OMZ::lib/key-bindings.zsh
-zinit ice wait lucid
+zinit ice lucid wait
 zinit snippet OMZ::lib/compfix.zsh
-zinit ice wait lucid
+zinit ice lucid wait
 zinit snippet OMZ::lib/directories.zsh
-zinit ice wait lucid
+zinit ice lucid wait
 zinit snippet OMZ::lib/grep.zsh
 zinit snippet OMZ::lib/functions.zsh
 zinit snippet OMZ::lib/misc.zsh
-zinit ice wait lucid
+zinit ice lucid wait
 zinit snippet OMZ::plugins/colored-man-pages/colored-man-pages.plugin.zsh
-zinit ice wait lucid
+zinit ice lucid wait
 zinit snippet OMZ::plugins/sudo/sudo.plugin.zsh
-zinit ice wait lucid atload"unalias grv"
+zinit ice lucid wait atload"unalias grv"
 zinit snippet OMZ::plugins/git/git.plugin.zsh
-zinit ice wait lucid
+zinit ice lucid wait
 zinit snippet OMZ::plugins/pip/pip.plugin.zsh
-zinit ice wait lucid
+zinit ice lucid wait
 zinit snippet OMZ::plugins/github/github.plugin.zsh
-zinit ice wait lucid
+zinit ice lucid wait
 zinit snippet OMZ::plugins/python/python.plugin.zsh
-zinit ice wait lucid
+zinit ice lucid wait
 zinit snippet OMZ::plugins/colorize/colorize.plugin.zsh
-zinit ice wait lucid
+zinit ice lucid wait
 zinit snippet OMZ::plugins/alias-finder/alias-finder.plugin.zsh
 
-# zinit ice wait lucid from'gh-r' as'program'
+# zinit ice lucid wait from'gh-r' as'program'
 # zinit light sei40kr/fast-alias-tips-bin
-# zinit ice wait lucid
+# zinit ice lucid wait
 # zinit light sei40kr/zsh-fast-alias-tips
-zinit ice from"gh-r" as"program"
+zinit ice lucid wait from"gh-r" as"program"
 zinit light junegunn/fzf
 
-zinit ice as"program" from"gh-r" mv"mise* -> mise" \
+zinit ice lucid wait as"program" from"gh-r" mv"mise* -> mise" \
     atclone"\$(pwd)/mise activate zsh > init.zsh"  atpull"%atclone" src"init.zsh" nocompile'!'
 zinit light jdx/mise
 
-zinit ice wait lucid as"program" from"gh-r" \
+zinit ice lucid wait as"program" from"gh-r" \
     atclone"./zoxide init zsh > init.zsh"  atpull"%atclone" src"init.zsh" nocompile'!'
 zinit light ajeetdsouza/zoxide
 
