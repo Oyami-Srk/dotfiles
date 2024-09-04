@@ -30,4 +30,4 @@ if [ "$ZSH_ENV_OPT_NOT_USE_PROXY" = "1" ]; then
     return
 fi
 
-proxy
+# proxy

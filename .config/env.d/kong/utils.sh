@@ -100,3 +100,8 @@ function calculate_regression_rate() {
     result=$(echo "$result * 100" | bc)
     printf "Regression rate from $base to $target: %.2f%%\n" "$result"
 }
+
+function get_nginx_worker_for() {
+    master_pid=$(ps -eo pid,args | grep 'nginx: master process' | grep "$1" | cut -d' ' -f 2)
+    pgrep -aP ${master_pid} | grep 'nginx: worker process' | cut -d' ' -f 1
+}
