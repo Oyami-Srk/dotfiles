@@ -98,6 +98,8 @@ zinit ice lucid wait
 zinit snippet OMZ::plugins/colorize/colorize.plugin.zsh
 zinit ice lucid wait
 zinit snippet OMZ::plugins/alias-finder/alias-finder.plugin.zsh
+# zinit ice wait lucid
+# zinit snippet OMZ::plugins/dotenv/dotenv.plugin.zsh
 
 # zinit ice lucid wait from'gh-r' as'program'
 # zinit light sei40kr/fast-alias-tips-bin
@@ -113,6 +115,9 @@ zinit light jdx/mise
 zinit ice lucid wait as"program" from"gh-r" \
     atclone"./zoxide init zsh > init.zsh"  atpull"%atclone" src"init.zsh" nocompile'!'
 zinit light ajeetdsouza/zoxide
+
+zinit ice lucid wait
+zinit light Oyami-Srk/zsh-dotenv
 
 # Theme
 if which disable_starship &> /dev/null; then
