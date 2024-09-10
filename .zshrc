@@ -63,27 +63,29 @@ zinit ice lucid wait
 zinit light hlissner/zsh-autopair
 zinit ice lucid wait as"null" atinit'fpath+=( $PWD );' atload"autoload -U deer;zle -N deer;bindkey '\ek' deer;"
 zinit light Vifon/deer
+zinit ice depth=1
+zinit light jeffreytse/zsh-vi-mode
+zinit ice lucid wait atload"bindkey -M vicmd ' ' vi-easy-motion"
+zinit light IngoMeyer441/zsh-easy-motion
 
 zinit snippet OMZ::lib/async_prompt.zsh
 zinit snippet OMZ::lib/git.zsh
+zinit snippet OMZ::lib/functions.zsh
+zinit snippet OMZ::lib/misc.zsh
+zinit snippet OMZ::lib/key-bindings.zsh
 
 zinit ice lucid wait
 zinit snippet OMZ::lib/completion.zsh
 zinit ice lucid wait
 zinit snippet OMZ::lib/history.zsh
-zinit snippet OMZ::lib/key-bindings.zsh
 zinit ice lucid wait
 zinit snippet OMZ::lib/compfix.zsh
 zinit ice lucid wait
 zinit snippet OMZ::lib/directories.zsh
 zinit ice lucid wait
 zinit snippet OMZ::lib/grep.zsh
-zinit snippet OMZ::lib/functions.zsh
-zinit snippet OMZ::lib/misc.zsh
 zinit ice lucid wait
 zinit snippet OMZ::plugins/colored-man-pages/colored-man-pages.plugin.zsh
-zinit ice lucid wait
-zinit snippet OMZ::plugins/sudo/sudo.plugin.zsh
 zinit ice lucid wait atload"unalias grv"
 zinit snippet OMZ::plugins/git/git.plugin.zsh
 zinit ice lucid wait
@@ -149,6 +151,10 @@ bindkey '\eK' end-of-line
 
 bindkey -s '\eo' 'cd ..\n'
 bindkey -s '\e;' 'll\n'
+
+# migrating to vim mode, with alt+delete as delete world
+bindkey -M viins '^[^H' backward-delete-word
+
 
 # Turn off case-sensitive
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
