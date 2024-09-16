@@ -10,14 +10,20 @@ return {
         'nvim-telescope/telescope.nvim',
         tag = '0.1.6',
         dependencies = { 'nvim-lua/plenary.nvim' },
-        lazy = true
+        lazy = true,
+        keys = {
+            { "<leader>ff", function() require('telescope.builtin').find_files() end, desc = "Open File" },
+        }
     },
     -- Ranger, Tree style file explorer
     -- REQUIRE: ranger
     -- {
     -- 'kelly-lin/ranger.nvim',
     -- config = configurator.ranger,
-    -- lazy = true
+    -- lazy = true,
+    -- keys = {
+    --     { "<leader>fr", function() require('ranger-nvim').open(true) end, desc = "Ranger" },
+    -- }
     -- },
     {
         "nvim-neo-tree/neo-tree.nvim",
@@ -28,6 +34,16 @@ return {
             "MunifTanjim/nui.nvim",
             -- "3rd/image.nvim"
         },
-        lazy = true
+        opts = {
+            filesystem = {
+                filtered_items = {
+                    visible = true,
+                }
+            }
+        },
+        lazy = true,
+        keys = {
+            { "<leader>ft", ":Neotree<CR>" },
+        }
     },
 }

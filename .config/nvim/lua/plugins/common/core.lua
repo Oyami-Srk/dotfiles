@@ -1,17 +1,8 @@
-local configurator = {
-    which_key = function()
-        local wk = require('which-key');
-        wk.setup()
-
-        local keymaps = {}
-        for _, file in ipairs(vim.fn.readdir(vim.fn.stdpath('config') .. '/lua/keybindings', [[v:val =~ '\.lua$']])) do
-            local keybinding = require('keybindings.' .. file:gsub('%.lua$', ''))
-            if keybinding ~= nil then
-                keymaps[keybinding.key] = keybinding.opts
-            end
-        end
-        wk.register(keymaps, { prefix = "<leader>" })
-    end,
+local initial_keybindings = {
+    -- File
+    { "<leader>f",  group = "file" },
+    { "<leader>fw", ":w",                         desc = "Write File" },
+    { "<leader>fe", ":e ~/.config/nvim/init.vim", desc = "Open Config" },
 }
 
 return {
@@ -21,6 +12,20 @@ return {
     {
         "folke/which-key.nvim",
         event = "VeryLazy",
-        config = configurator.which_key
-    }
+        keys = initial_keybindings,
+        dependencies = {
+            "echasnovski/mini.icons",
+        }
+    },
+    -- Easymotion
+    {
+        "easymotion/vim-easymotion",
+        event = "VeryLazy",
+        config = function()
+            vim.g.EasyMotion_do_mapping = 0
+            vim.g.EasyMotion_smartcase = 1
+            vim.g.EasyMotion_use_smartsign_us = 1
+            vim.g.EasyMotion_startofline = 0
+        end
+    },
 }
