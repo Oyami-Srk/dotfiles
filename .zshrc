@@ -159,6 +159,8 @@ bindkey -s '\e;' 'll\n'
 
 # migrating to vim mode, with alt+delete as delete world
 bindkey -M viins '^[^H' backward-delete-word
+# For Windows Terminal
+bindkey -M viins '^[^?' backward-delete-word
 
 
 # Turn off case-sensitive

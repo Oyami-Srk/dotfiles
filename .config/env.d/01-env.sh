@@ -1,6 +1,8 @@
 # TODO: improve performance
 
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+if [[ ! $SHELL_PLATFORM == "WSL1" ]]; then
+    export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+fi
 
 [[ -f "$HOME/.cargo/env" ]] && source "$HOME/.cargo/env"
 
