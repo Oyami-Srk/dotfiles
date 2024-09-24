@@ -176,3 +176,4 @@ export CLICOLOR=1
 export CLICOLOR_FORCE=1
 
 [[ ! -z "${ZPROF}" ]] && zprof
+
