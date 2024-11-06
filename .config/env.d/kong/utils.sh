@@ -35,7 +35,7 @@ function start_kong() {
         trap - INT
     }
 
-    tail -f $KONG_PREFIX/logs/*
+    tail -f $KONG_PREFIX/logs/${LOG_FILES:-*}
 }
 
 function last_nginx_pid() {
