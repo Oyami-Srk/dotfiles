@@ -177,3 +177,4 @@ export CLICOLOR_FORCE=1
 
 [[ ! -z "${ZPROF}" ]] && zprof
 
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh" || true
