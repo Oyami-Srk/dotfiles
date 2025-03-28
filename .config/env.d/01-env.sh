@@ -22,7 +22,7 @@ function reload_env() {
     if [[ -z "$1" ]]; then
         echo "Reloading whole environment"
         if [ -d $HOME/.config/env.d ]; then
-            for i in $HOME/.config/env.d/*.sh; do
+            for i in "$HOME/.config/env.d/*.sh"; do
                 if [ -r $i ]; then
                     source $i
                 fi
