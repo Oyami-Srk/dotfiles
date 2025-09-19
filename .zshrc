@@ -94,8 +94,8 @@ zinit ice lucid wait
 zinit snippet OMZ::plugins/github/github.plugin.zsh
 zinit ice lucid wait
 zinit snippet OMZ::plugins/python/python.plugin.zsh
-zinit ice lucid wait
-zinit snippet OMZ::plugins/colorize/colorize.plugin.zsh
+# zinit ice lucid wait
+# zinit snippet OMZ::plugins/colorize/colorize.plugin.zsh
 zinit ice lucid wait
 zinit snippet OMZ::plugins/alias-finder/alias-finder.plugin.zsh
 # zinit ice wait lucid
@@ -176,5 +176,6 @@ export CLICOLOR=1
 export CLICOLOR_FORCE=1
 
 [[ ! -z "${ZPROF}" ]] && zprof
+
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh" || true

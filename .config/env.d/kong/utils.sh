@@ -139,7 +139,8 @@ function load_kong_env_for() {
             else
                 export KONG_INCREMENTAL_SYNC=on
             fi
-            export KONG_INCREMENTAL_SYNC=$KONG_CLUSTER_RPC_SYNC
+            # For compatibility
+            export KONG_CLUSTER_RPC_SYNC=$KONG_INCREMENTAL_SYNC
             ;;
         --with-log-*)
             export KONG_LOG_LEVEL=${key#--with-log-}
@@ -171,3 +172,19 @@ function load_kong_env_for() {
         fi
     fi
 }
+
+function get-docker-image-commit() {
+    local resp=""
+    while [[ $# -gt 0 ]]; do
+        docker pull -q $1
+        resp+=$(docker image inspect $1 | jq -r '.[] | .RepoTags[0] + ": " + .Config.Labels."org.opencontainers.image.revision"')
+        resp+="\n"
+        shift
+    done
+    echo $resp
+}
+
+function inspect-capnp() {
+    capnp compile -o- ${@} | capnp convert binary:text /opt/homebrew/Cellar/capnp/1.1.0/include/capnp/schema.capnp CodeGeneratorRequest
+}
+
