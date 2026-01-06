@@ -188,3 +188,6 @@ function inspect-capnp() {
     capnp compile -o- ${@} | capnp convert binary:text /opt/homebrew/Cellar/capnp/1.1.0/include/capnp/schema.capnp CodeGeneratorRequest
 }
 
+function forward-port() {
+    ssh -NL ${1}:localhost:${3:-$1} ${2:-ec2}
+}

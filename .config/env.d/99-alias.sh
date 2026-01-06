@@ -46,6 +46,7 @@ function alias_common() {
     which vim 1>/dev/null && alias vi=vim
     which nvim 1>/dev/null && alias vim=nvim
     which exa 1>/dev/null && alias ls=exa
+    which eza 1>/dev/null && alias ls=eza
     which autossh 1>/dev/null && alias ssh="autossh -M 0 -t"
 
     alias v=vi
@@ -68,6 +69,11 @@ function alias_common() {
     alias td='t attach -d -t'
     alias tl='t list-sessions'
     alias taa='t new-session -As'
+
+    alias c='cargo'
+    alias ct='cargo test'
+    alias cto='cargo test -- --show-output'
+    alias cb='cargo build'
 
     alias minicom='env LANGUAGE=en LANG=en_US.UTF-8 minicom'
     alias hd="hexdump -ve '\"0x%08.8_ax  |  \" 4/1 \"%.2x \"   \"  \"4/1 \"%.2x \"   \"  \"4/1 \"%.2x \"   \"  \"4/1 \"%.2x \" ' -e '\" | \" 16/1 \"%_p\" \"\|\n\"'"
@@ -94,3 +100,4 @@ fi
 unfunction alias_common
 unfunction alias_linux
 unfunction alias_wsl
+

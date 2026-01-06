@@ -116,6 +116,25 @@ zinit ice lucid wait as"program" from"gh-r" \
     atclone"./zoxide init zsh > init.zsh"  atpull"%atclone" src"init.zsh" nocompile'!'
 zinit light ajeetdsouza/zoxide
 
+zinit ice wait lucid from'gh-r' id-as as'completion' bpick'man-*' atload'
+    alias ls="eza --icons --time-style=iso --git --classify --color-scale --color=auto"
+    alias ll="ls --long -i"
+    alias lt="ls --tree"
+    ' atpull'%atclone' atclone'
+    local VERSION=$(ls target | sed "s/man-//")
+    if [[ "$(uname -s)" = "Darwin"* ]]; then
+        local -A ICE=(ver eza-$VERSION)
+        .zinit-get-latest-gh-r-url-part cargo-bins cargo-quickinstall
+    else
+        local -A ICE=(bpick "eza*")
+        .zinit-get-latest-gh-r-url-part eza-community eza
+    fi
+    [ -n "$reply" ] && wget https://github.com/$reply -O eza.tar.gz && tar -xzf eza.tar.gz && rm -f eza.tar.gz && ln -svf $PWD/eza $ZPFX/bin
+    wget https://raw.githubusercontent.com/eza-community/eza/main/completions/zsh/_eza -O _eza
+    for man in $PWD/target/*/*.1; do ln -svf $man $ZPFX/man/man1; done
+    for man in $PWD/target/*/*.5; do ln -svf $man $ZPFX/man/man5; done'
+zinit light eza-community/eza
+
 zinit ice lucid wait
 zinit light Oyami-Srk/zsh-dotenv
 
