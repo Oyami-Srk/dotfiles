@@ -57,3 +57,5 @@ if [ -d $HOME/.config/env.d ]; then
 fi
 
 [[ -f $(which nvim) ]] && export EDITOR="nvim"
+. "$HOME/.cargo/env"
+

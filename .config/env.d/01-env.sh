@@ -1,9 +1,5 @@
 # TODO: improve performance
 
-if [[ ! $SHELL_PLATFORM == "WSL1" ]]; then
-    export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
-fi
-
 [[ -f "$HOME/.cargo/env" ]] && source "$HOME/.cargo/env"
 
 if [[ -d "/usr/local/lib/node_modules/@hyperupcall/autoenv/" ]]; then
