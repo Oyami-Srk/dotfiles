@@ -72,8 +72,11 @@ function alias_common() {
 
     alias c='cargo'
     alias ct='cargo test'
+    alias cta='cargo test --all'
     alias cto='cargo test -- --show-output'
     alias cb='cargo build'
+    alias cnt='cargo nextest'
+    alias cntr='cargo nextest run'
 
     alias minicom='env LANGUAGE=en LANG=en_US.UTF-8 minicom'
     alias hd="hexdump -ve '\"0x%08.8_ax  |  \" 4/1 \"%.2x \"   \"  \"4/1 \"%.2x \"   \"  \"4/1 \"%.2x \"   \"  \"4/1 \"%.2x \" ' -e '\" | \" 16/1 \"%_p\" \"\|\n\"'"

@@ -16,4 +16,5 @@ if vim.g.vscode ~= nil then
 else
     Must_require("standalong")
 end
-Must_require("global")
+
+return Must_require("global")
