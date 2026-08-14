@@ -138,6 +138,9 @@ zinit light eza-community/eza
 zinit ice lucid wait
 zinit light Oyami-Srk/zsh-dotenv
 
+# Private config
+test -e "${HOME}/.zshrc.local" && source "${HOME}/.zshrc.local" || true
+
 # Theme
 if which disable_starship &> /dev/null; then
     eval $(starship init zsh)
@@ -145,7 +148,7 @@ else
     setopt promptsubst
     setopt prompt_subst
     local ret_status="%F{blue}[%s%?]"
-    PS1='%F{green}%2c%F{blue} >  %f'
+    PS1='%F{green}%2c%F{blue} ${ZSH_IDENTIFIER:->}  %f'
     RPROMPT='$(git_prompt_info) %F{green}%D{%H:%M:%S} $ret_status'
     if [ $SHELL_PLATFORM = "MSYS" ]; then
         # git prompt info is too slow on msys2
